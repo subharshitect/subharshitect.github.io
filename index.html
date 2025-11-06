@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subharshi Roy — ML Systems</title>
+  <meta name="description" content="Researcher in ML Systems — model compression, serving, and performance engineering.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/style.css" as="style">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="wrap header">
+    <div class="brand">
+      <span class="logo">S</span>
+      <div>
+        <h1 class="title">Subharshi Roy</h1>
+        <p class="subtitle">PhD Student — ML Systems</p>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#writing">Writing</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <div class="hero-text">
+        <h2>Building fast, frugal, faithful systems for large models</h2>
+        <p>I work on model deltas, KV cache systems, and performance tracing across CPU and GPU stacks. My research blends clean math with hard systems work to make inference practical at scale.</p>
+        <div class="cta">
+          <a class="btn" href="#research">See research</a>
+          <a class="btn ghost" href="#projects">See projects</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="wrap section">
+      <h3>About</h3>
+      <p>PhD student at IIT Delhi. I design and measure ML systems — fine tuned model deduplication, delta based storage, and KV cache scheduling. I enjoy clean minimal designs and strong measurements.</p>
+      <ul class="facts">
+        <li>Interests: parameter efficient finetuning, delta compression, paging for KV cache, tracing.</li>
+        <li>Tools: PyTorch, CUDA, Triton, eBPF, perf, Prometheus, Grafana, llama.cpp.</li>
+        <li>Hardware: RTX 5000 Ada, Linux laptops, small GPU clusters.</li>
+      </ul>
+    </section>
+
+    <section id="research" class="wrap section">
+      <h3>Research</h3>
+      <div class="cards">
+        <article class="card">
+          <h4>UNITE — deduplicating fine tuned variants by storing only unique deltas</h4>
+          <p>System for sharing base tensors and loading only non shared layers across many customers. Target — reduce memory, preserve quality.</p>
+          <p class="meta">Keywords: deltas, storage, serving</p>
+          <a class="pill" href="#" aria-disabled="true">Paper — coming</a>
+          <a class="pill" href="#" aria-disabled="true">Code — private for now</a>
+        </article>
+        <article class="card">
+          <h4>Binary Angle — 1 bit sign masks and simple packing for delta storage</h4>
+          <p>Practical delta packing approach with clean implementation. Good for demos and teaching.</p>
+          <p class="meta">Keywords: bitpacking, signs, minimal code</p>
+          <a class="pill" href="#" aria-disabled="true">Notes — coming</a>
+        </article>
+        <article class="card">
+          <h4>LLM CPU Tracer — tokens to transistors</h4>
+          <p>Multi layer instrumentation for CPU inference. Logs tokens per second, IPC, cache misses, and power. Grafana dashboards for quick insight.</p>
+          <p class="meta">Keywords: eBPF, RAPL, perf</p>
+          <a class="pill" href="#" aria-disabled="true">Docs — coming</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="wrap section">
+      <h3>Projects</h3>
+      <ul class="list">
+        <li><strong>DeltaZip notes</strong> — explorations of delta compression ideas.</li>
+        <li><strong>DAREx studies</strong> — clean writeups on dropped and rescaled deltas.</li>
+        <li><strong>FlashInfer kernels</strong> — sparse attention experiments.</li>
+      </ul>
+    </section>
+
+    <section id="writing" class="wrap section">
+      <h3>Writing</h3>
+      <ul class="list">
+        <li><a href="#" aria-disabled="true">The Soft Ache Ceremony — selected pieces</a></li>
+        <li><a href="#" aria-disabled="true">Notes on KV cache paging and vAttention</a></li>
+        <li><a href="#" aria-disabled="true">BitDelta and friends — a short map</a></li>
+      </ul>
+    </section>
+
+    <section id="contact" class="wrap section">
+      <h3>Contact</h3>
+      <p>Email: <a href="mailto:subharshi.roy@iitd.ac.in">subharshi.roy@iitd.ac.in</a></p>
+      <p>GitHub: <a href="https://github.com/subharshitect">github.com/subharshitect</a></p>
+      <p>Bluesky or X: <a href="#" aria-disabled="true">link soon</a></p>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <p>© <span id="y"></span> Subharshi Roy — built with pure HTML and CSS</p>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
