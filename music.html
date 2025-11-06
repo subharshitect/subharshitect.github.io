@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subharshi; music / signal</title>
+  <meta name="description" content="Tracks that shape my silence.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/music.css">
+</head>
+<body>
+  <header class="wrap header">
+    <div class="brand">
+      <h1 class="title">music / signal</h1>
+    </div>
+    <nav class="nav">
+      <a href="index.html">home</a>
+    </nav>
+  </header>
+
+  <main class="wrap section">
+    <p class="muted">sounds i orbit around; fragments, moods, reverb.</p>
+
+     <div id="music-grid" class="music-grid" style="justify-items:center;">
+      <!-- Add links below: one per line -->
+      <a href="https://www.youtube.com/watch?v=M1dtkfI_iuI" data-title="the ghost song"></a>
+      <a href="https://www.youtube.com/watch?v=XgCnUYeyeiA" data-title="when the smoke is going down"></a>      
+      <a href="https://www.youtube.com/watch?v=mJx5GlTEcmQ" data-title="draconid - creatureism"></a>
+      <a href="https://www.youtube.com/watch?v=ix-6vG3qXPc" data-title="three lices and a molly - 'maybe we'll hug each other in a past life"></a>
+      <a href="https://www.youtube.com/watch?v=7GbB2PgUeXs" data-title="sorry i sleepwalked at your funeral"></a>
+      <!-- a href="" data-title=""></a>
+      <!-- Add more links the same way -->
+    </div>
+  </main>
+
+  <footer class="wrap footer">
+    <p>© <span id="y"></span> Subharshi Roy — signal / silence</p>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Dynamically load thumbnails
+    const links = document.querySelectorAll('#music-grid a');
+    links.forEach(a => {
+      const url = a.href;
+      const id = url.split('v=')[1]?.split('&')[0];
+      if (!id) return;
+      a.innerHTML = `
+        <div class="thumb">
+          <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="${a.dataset.title}">
+          <div class="overlay">${a.dataset.title}</div>
+        </div>
+      `;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+    });
+  </script>
+</body>
+</html>

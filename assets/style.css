@@ -102,3 +102,132 @@ a:hover { text-decoration: underline; }
 .wrap { width: min(880px, 92%); }
 .hero { padding: 46px 0 8px; }
 .section { padding: 28px 0; }
+
+/* responsive portrait - remove any inline size overrides */
+.avatar-xl {
+  width: clamp(96px, 22vw, 160px);
+  height: clamp(96px, 22vw, 160px);
+  border-radius: 18px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  filter: grayscale(10%) contrast(1.02);
+}
+
+/* psyche section layout */
+.grid.two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+@media (max-width: 720px) {
+  .grid.two { grid-template-columns: 1fr; }
+}
+
+/* mood cards for fragments */
+.verse {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+}
+.verse p { margin: 0 0 10px; }
+.verse p:last-child { margin: 0; }
+
+/* thin divider */
+.rule {
+  border-top: 1px solid var(--line);
+  margin: 16px 0;
+}
+
+/* small principle chips */
+.principles { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+/* image hygiene */
+img { max-width: 100%; height: auto; }
+
+/* optional: slightly slower hover, low motion friendly */
+@media (prefers-reduced-motion: no-preference) {
+  a:hover { transition: filter .12s ease; }
+  .card:hover { filter: brightness(1.02); }
+}
+
+/* ---- aesthetic deepening ---- */
+
+/* smoother typography */
+body {
+  font-family: "Inter", "IBM Plex Sans", system-ui, sans-serif;
+  background: radial-gradient(circle at 40% 20%, #0b0b10 0%, #060607 100%);
+  letter-spacing: 0.1px;
+}
+
+/* low glow on headings */
+h1, h3 {
+  text-transform: lowercase;
+  text-shadow: 0 0 6px rgba(255,255,255,0.05);
+  letter-spacing: 0.6px;
+}
+
+/* nav hover line */
+.nav a {
+  position: relative;
+  padding-bottom: 2px;
+}
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0; height: 1px;
+  background: var(--accent);
+  transition: width .2s ease;
+}
+.nav a:hover::after { width: 100%; }
+
+/* hero gradient overlay */
+.hero {
+  background: linear-gradient(180deg, rgba(10,10,15,0.6) 0%, rgba(5,5,7,0) 100%);
+  text-align: center;
+}
+.hero .tagline, .hero .darkline {
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+/* buttons refinement */
+.btn, .btn.ghost {
+  text-transform: lowercase;
+  letter-spacing: 0.4px;
+  transition: all .15s ease-in-out;
+}
+.btn:hover { filter: brightness(1.15); }
+.btn.ghost:hover { background: var(--line); }
+
+/* avatar mild shadow */
+.avatar {
+  box-shadow: 0 0 40px rgba(0,0,0,0.4);
+}
+
+/* chips aesthetic */
+.chips span {
+  border-color: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.02);
+  transition: background .2s ease;
+}
+.chips span:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+/* footer thin separation */
+.footer {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  text-align: center;
+  opacity: 0.7;
+}
