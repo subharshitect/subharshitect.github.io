@@ -91,13 +91,30 @@
       </p>
     </section>
 
-    <section id="contact" class="wrap section">
-      <h3>contact</h3>
-      <p>Email: <a href="mailto:r.subharshi@gmail.com">r.subharshi@gmail.com</a></p>
-      <p>GitHub: <a href="https://github.com/subharshitect">github.com/subharshitect</a></p>
-      <p><a href="music.html">music / signal</a></p>
-    </section>
+  <section id="contact" class="wrap section">
+    <h3>contact</h3>
+    <p>
+      Email:
+      <a href="#" id="email-link">r[dot]subharshi [at] gmail[dot]com</a>
+    </p>
+    <p>GitHub: <a href="https://github.com/subharshitect">github.com/subharshitect</a></p>
+    <p><a href="music.html">music / signal</a></p>
+  </section>
   </main>
+  
+  <script>
+    (function () {
+      var user = "r.subharshi";
+      var domain = "gmail.com";
+      var link = document.getElementById("email-link");
+  
+      if (link) {
+        link.href = "mailto:" + user + "@" + domain;
+        link.textContent = user + "@" + domain;
+      }
+    })();
+  </script>
+
 
   <footer class="wrap footer">
     <p>© <span id="y"></span> Subharshi Roy; machine / memory / myth</p>
