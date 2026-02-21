@@ -10,6 +10,8 @@
   const lensOut = U.qs("#lens-output");
   const heartbeat = U.qs("#heartbeat");
   const buildIdNode = U.qs("#buildId");
+  const pulseVal = U.qs("#pulseVal");
+  const debugLine = U.qs("#debugLine");
   const r = U.qs("#lens-rigor");
   const c = U.qs("#lens-compression");
   const k = U.qs("#lens-control");
@@ -75,25 +77,28 @@
   }
 
   function stampSigils() {
-    const chars = "|/\\_=:;+*#@~^";
-    U.qsa("main .section").forEach((sec) => {
-      if (!sec.id || U.qs(".sigil", sec)) return;
-      const h = U.hash(sec.id);
-      const rand = U.seeded(h);
-      const lines = [];
-      for (let y = 0; y < 5; y += 1) {
-        let row = "";
-        for (let x = 0; x < 14; x += 1) {
-          const gate = (x + y + (h % 7)) % 3 === 0;
-          row += gate ? chars[Math.floor(rand() * chars.length)] : " ";
-        }
-        lines.push(row);
+    const build = U.qs('meta[name="build-id"]')?.getAttribute("content") || "build";
+    U.qsa('.sigil[data-sigil]').forEach((pre) => {
+      const chars = "|/\_=:;+*#@~^";
+      const sig = pre.getAttribute("data-sigil") || "x";
+      const rand = U.seeded(U.hash(`${build}::${sig}`));
+      const w = 18;
+      const h = 10;
+      const g = Array.from({ length: h }, () => Array(w).fill(" "));
+      for (let x = 2; x < w - 2; x += 1) { if (rand() > 0.3) g[1][x] = "="; if (rand() > 0.4) g[h - 2][x] = "="; }
+      for (let y = 2; y < h - 2; y += 1) { if (rand() > 0.35) g[y][2] = "|"; if (rand() > 0.42) g[y][w - 3] = "|"; }
+      for (let i = 0; i < 4; i += 1) {
+        const x0 = 3 + Math.floor(rand() * (w - 6));
+        const y0 = 2 + Math.floor(rand() * (h - 4));
+        g[y0][x0] = "+";
+        if (x0 + 1 < w) g[y0][x0 + 1] = rand() > 0.5 ? "_" : "-";
+        if (y0 + 1 < h) g[y0 + 1][x0] = rand() > 0.5 ? ":" : "|";
       }
-      const pre = document.createElement("pre");
-      pre.className = "sigil";
-      pre.setAttribute("aria-hidden", "true");
-      pre.textContent = lines.join("\n");
-      sec.appendChild(pre);
+      const cx = Math.floor(w / 2);
+      const cy = Math.floor(h / 2);
+      g[cy][cx - 1] = "*"; g[cy][cx] = "@"; g[cy][cx + 1] = "#";
+      g[cy + 2][cx - 1] = "~"; g[cy + 2][cx] = "^"; g[cy + 2][cx + 1] = "~";
+      pre.textContent = g.map((r) => r.join("")).join("\n");
     });
   }
 
@@ -167,6 +172,9 @@
       if (safe) safe.checked = next;
       applySafe(next);
     }
+    if (e.key.toLowerCase() === "d" && debugLine) {
+      debugLine.hidden = !debugLine.hidden;
+    }
     if (e.key === "[" || e.key === "]") {
       const delta = e.key === "[" ? -3 : 3;
       const now = U.clamp((Number(signal?.value || live.signal) + delta), 0, 100);
@@ -183,8 +191,10 @@
   window.addEventListener("organism-heartbeat", (e) => {
     const ent = U.clamp(Number(e.detail?.entropy) || 0, 0, 1);
     live.pulse = U.lerp(live.pulse, ent, 0.25);
-    const bpm = Math.round(42 + ent * 92);
+    const bpm = Math.round(40 + ent * 120);
     if (heartbeat) heartbeat.textContent = `PULSE: ${bpm}`;
+    if (pulseVal) pulseVal.textContent = String(bpm);
+    if (debugLine && !debugLine.hidden) debugLine.textContent = `debug entropy=${ent.toFixed(3)} phase=${live.phase.toFixed(3)}`;
   });
 
   if (year) year.textContent = String(new Date().getFullYear());
