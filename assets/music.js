@@ -4,7 +4,6 @@
   if (!U) return;
   const grid = U.qs("#music-grid");
   const bar = U.qs("#tag-filters");
-  const extToggle = U.qs("#external-thumbs");
   if (!grid || !bar) return;
 
   const tracks = [
@@ -23,92 +22,39 @@
       if (u.hostname.includes("youtu.be")) return u.pathname.replace(/^\//, "").split("/")[0] || "";
       if (u.pathname.startsWith("/shorts/")) return u.pathname.split("/")[2] || "";
       if (u.pathname.startsWith("/watch")) return u.searchParams.get("v") || "";
-      return u.searchParams.get("v") || "";
-    } catch (_e) { return ""; }
+      const maybe = u.searchParams.get("v");
+      return maybe || "";
+    } catch (_e) {
+      return "";
+    }
   }
 
-  function asciiThumb(seedText, pulse = 0) {
-    const seed = U.hash(seedText);
-    const r = U.seeded(seed + Math.floor(pulse * 1000));
-    const chars = " .:-=+*#@";
+  function asciiThumb(seedText) {
+    const seed = seedText.split("").reduce((a, c) => a + c.charCodeAt(0), 0) + 37;
+    const r = U.seeded(seed);
+    const chars = " .:-=+*#%@";
     const lines = [];
     for (let y = 0; y < 8; y += 1) {
       let row = "";
       for (let x = 0; x < 30; x += 1) {
-        const sig = Math.sin((x + pulse * 6) * 0.22) * Math.cos((y - pulse * 3) * 0.41);
-        const v = ((sig + 1) * 0.5) * 0.65 + r() * 0.35;
-        row += chars[Math.floor(U.clamp(v, 0, 0.999) * (chars.length - 1))] || " ";
+        const v = (Math.sin(x * 0.25 + y * 0.7) + 1) / 2 * 0.5 + r() * 0.5;
+        row += chars[Math.floor(v * (chars.length - 1))];
       }
       lines.push(row);
     }
     return lines.join("\n");
   }
 
-  function enableKeyboardGrid() {
-    const links = U.qsa(".song-link", grid);
-    if (!links.length) return;
-    grid.addEventListener("keydown", (e) => {
-      const focused = document.activeElement;
-      const i = links.indexOf(focused);
-      if (i < 0) return;
-      const col = Math.max(1, Math.floor(grid.clientWidth / 220));
-      let next = i;
-      if (e.key === "ArrowRight") next = Math.min(links.length - 1, i + 1);
-      else if (e.key === "ArrowLeft") next = Math.max(0, i - 1);
-      else if (e.key === "ArrowDown") next = Math.min(links.length - 1, i + col);
-      else if (e.key === "ArrowUp") next = Math.max(0, i - col);
-      else if (e.key === "Enter") { focused.click(); return; }
-      else return;
-      e.preventDefault();
-      links[next].focus();
-    });
-  }
-
-  function maybeAttachExternalThumb(tile, id) {
-    if (!extToggle || !extToggle.checked || !id) return;
-    try {
-      const img = document.createElement("img");
-      img.alt = "";
-      img.loading = "lazy";
-      img.referrerPolicy = "no-referrer";
-      img.style.maxWidth = "100%";
-      img.style.opacity = "0.4";
-      img.style.border = "1px solid var(--line)";
-      img.onerror = () => { img.remove(); };
-      img.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-      tile.appendChild(img);
-    } catch (_e) {
-      return;
-    }
-  }
-
   function render(tag = "ALL") {
     const items = tracks.filter((t) => tag === "ALL" || t.tags.includes(tag));
-    grid.innerHTML = items.map((t, i) => {
+    grid.innerHTML = items.map((t) => {
       const id = parseYouTubeId(t.url);
-      return `<article class="song-tile" data-i="${i}" tabindex="-1">
-        <pre class="song-ascii">${asciiThumb(id || t.title, 0)}</pre>
-        <a class="song-link" href="${t.url}" target="_blank" rel="noopener noreferrer">${t.title}</a>
+      return `<article class="song-tile">
+        <pre class="song-ascii">${asciiThumb(id || t.title)}</pre>
+        <a href="${t.url}" target="_blank" rel="noopener noreferrer">${t.title}</a>
         <div class="song-tags">${t.tags.join(" · ")} · id:${id || "unknown"}</div>
       </article>`;
     }).join("");
-
-    U.qsa(".song-tile", grid).forEach((tile) => {
-      const link = U.qs(".song-link", tile);
-      const ascii = U.qs(".song-ascii", tile);
-      if (!link || !ascii) return;
-      const id = parseYouTubeId(link.href);
-      maybeAttachExternalThumb(tile, id);
-      const animate = () => {
-        if (document.body.dataset.safe === "on" || U.prefersReducedMotion()) return;
-        ascii.textContent = asciiThumb(id || link.textContent || "", 0.8);
-        setTimeout(() => { ascii.textContent = asciiThumb(id || link.textContent || "", 0); }, 180);
-      };
-      tile.addEventListener("mouseenter", animate);
-      tile.addEventListener("focusin", animate);
-    });
-
-    enableKeyboardGrid();
   }
 
   bar.addEventListener("click", (e) => {
@@ -117,11 +63,6 @@
     const tag = btn.dataset.tag || "ALL";
     U.qsa("button[data-tag]", bar).forEach((b) => b.classList.toggle("active", b === btn));
     render(tag);
-  });
-
-  if (extToggle) extToggle.addEventListener("change", () => {
-    const active = U.qs("button[data-tag].active", bar);
-    render(active?.dataset.tag || "ALL");
   });
 
   window.__MUSIC_TEST__ = { parseYouTubeId };
