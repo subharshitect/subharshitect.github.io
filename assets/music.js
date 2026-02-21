@@ -16,6 +16,8 @@
     { url: "https://www.youtube.com/watch?v=8LiTxEUxSHU&list=RD8LiTxEUxSHU&start_radio=1", title: "quazar / sanxion - hybrid song", tags: ["KINETIC", "NOCTURNE"] }
   ];
 
+  const state = { tag: "ALL", frame: 0, raf: 0, running: false };
+
   function parseYouTubeId(raw) {
     try {
       const u = new URL(raw);
@@ -29,16 +31,17 @@
     }
   }
 
-  function asciiThumb(seedText) {
+  function asciiThumb(seedText, frame) {
     const seed = seedText.split("").reduce((a, c) => a + c.charCodeAt(0), 0) + 37;
-    const r = U.seeded(seed);
+    const r = U.seeded(seed + frame * 41);
     const chars = " .:-=+*#%@";
     const lines = [];
     for (let y = 0; y < 8; y += 1) {
       let row = "";
       for (let x = 0; x < 30; x += 1) {
-        const v = (Math.sin(x * 0.25 + y * 0.7) + 1) / 2 * 0.5 + r() * 0.5;
-        row += chars[Math.floor(v * (chars.length - 1))];
+        const phase = Math.sin((x + frame * 0.25) * 0.22) + Math.cos((y + frame * 0.2) * 0.7);
+        const v = ((phase + 2) / 4) * 0.65 + r() * 0.35;
+        row += chars[Math.floor(U.clamp(v, 0, 0.999) * chars.length)];
       }
       lines.push(row);
     }
@@ -46,15 +49,44 @@
   }
 
   function render(tag = "ALL") {
+    state.tag = tag;
     const items = tracks.filter((t) => tag === "ALL" || t.tags.includes(tag));
     grid.innerHTML = items.map((t) => {
       const id = parseYouTubeId(t.url);
       return `<article class="song-tile">
-        <pre class="song-ascii">${asciiThumb(id || t.title)}</pre>
+        <pre class="song-ascii">${asciiThumb(id || t.title, state.frame)}</pre>
         <a href="${t.url}" target="_blank" rel="noopener noreferrer">${t.title}</a>
         <div class="song-tags">${t.tags.join(" · ")} · id:${id || "unknown"}</div>
       </article>`;
     }).join("");
+  }
+
+  function shouldRun() {
+    return !U.prefersReducedMotion() && document.body.dataset.safe !== "on" && !document.hidden;
+  }
+
+  function tick(ts) {
+    if (!state.running) return;
+    if (!state.last || ts - state.last > 160) {
+      state.last = ts;
+      state.frame += 1;
+      render(state.tag);
+    }
+    state.raf = requestAnimationFrame(tick);
+  }
+
+  function syncRun() {
+    if (shouldRun()) {
+      if (!state.running) {
+        state.running = true;
+        state.raf = requestAnimationFrame(tick);
+      }
+    } else {
+      state.running = false;
+      if (state.raf) cancelAnimationFrame(state.raf);
+      state.frame += 1;
+      render(state.tag);
+    }
   }
 
   bar.addEventListener("click", (e) => {
@@ -65,6 +97,9 @@
     render(tag);
   });
 
+  document.addEventListener("visibilitychange", syncRun);
+  window.addEventListener("safe-mode-change", syncRun);
   window.__MUSIC_TEST__ = { parseYouTubeId };
   render("ALL");
+  syncRun();
 })();

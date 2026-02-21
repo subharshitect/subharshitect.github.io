@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Subharshi Roy - Archive Surface</title>
   <meta name="description" content="A dark systems dossier of machine, memory, and myth.">
+  <meta name="build-id" content="20260221-1200-A1F7">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/ascii.css">
   <link rel="stylesheet" href="assets/motion.css">
 </head>
 <body data-mode="exp" data-safe="off" data-archive-view="gallery">
+  <div class="build-watermark">BUILD 20260221-1200-A1F7</div>
   <div class="surface" aria-hidden="true"></div>
 
   <header class="rail">
@@ -34,6 +36,7 @@
 
   <main id="top">
     <section class="hero section">
+      <pre class="sigil" data-sigil="hero" aria-hidden="true"></pre>
       <h1>Subharshi Roy</h1>
       <p class="subtitle">researcher | ml systems | psychonaut of silicon</p>
       <p>genes write structure; minds write meaning; matter learns to model itself: consciousness</p>
@@ -42,6 +45,7 @@
     </section>
 
     <section id="work" class="section">
+      <pre class="sigil" data-sigil="work" aria-hidden="true"></pre>
       <h2>WORK</h2>
       <p>PhD at IIT Delhi. I inhabit the thin membrane between algorithm and flesh; tracing how memory collapses when optimized. My research lives in the dark geometry of deltas, KV caches, and the slow thermodynamics of computation.</p>
       <ul>
@@ -52,6 +56,7 @@
     </section>
 
     <section id="signal" class="section">
+      <pre class="sigil" data-sigil="signal" aria-hidden="true"></pre>
       <h2>MECHANISM LENS</h2>
       <div class="lens-grid">
         <label>rigor &lt;-&gt; romance
@@ -67,7 +72,20 @@
       <p id="lens-output" class="lens-output">calibrating mechanism lens...</p>
     </section>
 
+
+
+    <section id="portrait" class="wrap section dossier-panel">
+      <div class="panel-head">
+        <h3>portrait</h3>
+        <div class="ascii-label">PORTRAIT: GHOST SIGNAL</div>
+        <div class="pulse">PULSE: <span id="pulseVal">--</span></div>
+        <div class="debugline" id="debugLine" hidden>debug</div>
+      </div>
+      <pre id="ascii-portrait" class="ascii-portrait" aria-label="Ghost portrait signal"></pre>
+    </section>
+
     <section id="writing" class="section">
+      <pre class="sigil" data-sigil="writing" aria-hidden="true"></pre>
       <h2>WRITING</h2>
       <p><a href="https://medium.com/@r.subharshi" target="_blank" rel="noopener noreferrer">medium.com/@r.subharshi</a></p>
       <ol class="fragments">
@@ -82,6 +100,7 @@
     </section>
 
     <section id="archive" class="section">
+      <pre class="sigil" data-sigil="archive" aria-hidden="true"></pre>
       <h2>ARCHIVE</h2>
       <div class="archive-controls">
         <button id="archive-view-toggle" type="button" class="ctl">VIEW: GALLERY</button>
@@ -96,11 +115,13 @@
     </section>
 
     <section id="cv" class="section">
+      <pre class="sigil" data-sigil="cv" aria-hidden="true"></pre>
       <h2>CV</h2>
       <p>systems research, model internals, inference reliability, and trace forensics.</p>
     </section>
 
     <section id="contact" class="section">
+      <pre class="sigil" data-sigil="contact" aria-hidden="true"></pre>
       <h2>CONTACT</h2>
       <p><a href="mailto:r.subharshi@gmail.com">r.subharshi@gmail.com</a></p>
       <p><a href="https://github.com/subharshitect" target="_blank" rel="noopener noreferrer">github.com/subharshitect</a></p>
@@ -113,7 +134,7 @@
     </section>
   </main>
 
-  <footer class="section footer">© <span id="year"></span> Subharshi Roy; machine / memory / myth</footer>
+  <footer class="section footer">© <span id="year"></span> Subharshi Roy; machine / memory / myth · Build: <span id="buildId"></span></footer>
 
   <script src="assets/util.js"></script>
   <script src="assets/ascii.js"></script>
