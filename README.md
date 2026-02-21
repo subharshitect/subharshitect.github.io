@@ -1,6 +1,7 @@
 # subharshitect.github.io
 
-> the machine hums quietly beneath the words.  
-> this page; bare metal and breath—hosts my work, my decay, my deltas.
+void static surface.
 
-© subharshi — 2025
+- no build
+- no deps
+- open index.html
