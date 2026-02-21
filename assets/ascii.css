@@ -1,0 +1,33 @@
+.ascii-field,
+.ascii-mini,
+.song-ascii {
+  margin: 0;
+  white-space: pre;
+  overflow: hidden;
+  font-size: 0.66rem;
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+  border: 1px solid var(--line);
+  background: rgba(3, 5, 8, 0.88);
+  color: color-mix(in srgb, var(--accent) 72%, #ffffff 28%);
+  padding: 0.45rem;
+}
+.ascii-field {
+  width: 100%;
+  min-height: 260px;
+  max-height: 260px;
+}
+.portrait {
+  margin-top: 0.55rem;
+  min-height: 180px;
+  max-height: 180px;
+  color: color-mix(in srgb, var(--accent) 60%, #dcefff 40%);
+}
+.ascii-mini {
+  min-height: 72px;
+  max-height: 72px;
+}
+.song-ascii {
+  min-height: 84px;
+  max-height: 84px;
+}

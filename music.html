@@ -3,61 +3,46 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Subharshi; music / signal</title>
-  <meta name="description" content="Tracks that shape my silence.">
+  <title>Signal Music Grid</title>
+  <meta name="description" content="Signal-tagged tracks and ASCII thumbnails.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/style.css">
-  <link rel="stylesheet" href="assets/music.css">
+  <link rel="stylesheet" href="assets/ascii.css">
 </head>
-<body>
-  <header class="wrap header">
-    <div class="brand">
-      <h1 class="title">music / signal</h1>
+<body data-mode="exp" data-safe="off">
+  <div class="surface" aria-hidden="true"></div>
+  <header class="rail">
+    <a href="index.html">INDEX</a>
+    <span>MUSIC SIGNAL GRID</span>
+    <div class="rail-controls">
+      <button id="mode-toggle" type="button" class="ctl">MODE: EXPLOSION</button>
     </div>
-    <nav class="nav">
-      <a href="index.html">home</a>
-    </nav>
   </header>
 
-  <main class="wrap section">
-    <p class="muted">sounds i orbit around; fragments, moods, reverb.</p>
+  <main class="section">
+    <h1>MUSIC</h1>
+    <p>dense signal map - filtered by emotional kinetics.</p>
 
-     <div id="music-grid" class="music-grid" style="justify-items:center;">
-      <!-- Add links below: one per line -->
-      <a href="https://www.youtube.com/watch?v=M1dtkfI_iuI" data-title="the ghost song"></a>
-      <a href="https://www.youtube.com/watch?v=XgCnUYeyeiA" data-title="when the smoke is going down"></a>      
-      <a href="https://www.youtube.com/watch?v=mJx5GlTEcmQ" data-title="draconid - creatureism"></a>
-      <a href="https://www.youtube.com/watch?v=ix-6vG3qXPc" data-title="three lices and a molly - 'maybe we'll hug each other in a past life"></a>
-      <a href="https://www.youtube.com/watch?v=7GbB2PgUeXs" data-title="sorry i sleepwalked at your funeral"></a>
-      <a href="https://www.youtube.com/watch?v=Qw_tkIBb7u4" data-title="febrile"></a>
-      <a href="https://www.youtube.com/watch?v=8LiTxEUxSHU&list=RD8LiTxEUxSHU&start_radio=1" data-title="quazar / sanxion - hybrid song"></a>
-      <!-- a href="" data-title=""></a>
-      <!-- Add more links the same way -->
+    <div id="tag-filters" class="chips" role="toolbar" aria-label="Track filters">
+      <button type="button" data-tag="ALL" class="chip active">ALL</button>
+      <button type="button" data-tag="VOID" class="chip">VOID</button>
+      <button type="button" data-tag="KINETIC" class="chip">KINETIC</button>
+      <button type="button" data-tag="TENDER" class="chip">TENDER</button>
+      <button type="button" data-tag="FERAL" class="chip">FERAL</button>
+      <button type="button" data-tag="NOCTURNE" class="chip">NOCTURNE</button>
+      <button type="button" data-tag="RITUAL" class="chip">RITUAL</button>
+      <label class="ctl ctl-inline" for="external-thumbs">EXT THUMBS
+        <input id="external-thumbs" type="checkbox">
+      </label>
     </div>
+
+    <section id="music-grid" class="music-grid" aria-live="polite"></section>
   </main>
 
-  <footer class="wrap footer">
-    <p>© <span id="y"></span> Subharshi Roy — signal / silence</p>
-  </footer>
+  <footer class="section footer">© <span id="year"></span> Subharshi Roy; machine / memory / myth</footer>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Dynamically load thumbnails
-    const links = document.querySelectorAll('#music-grid a');
-    links.forEach(a => {
-      const url = a.href;
-      const id = url.split('v=')[1]?.split('&')[0];
-      if (!id) return;
-      a.innerHTML = `
-        <div class="thumb">
-          <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="${a.dataset.title}">
-          <div class="overlay">${a.dataset.title}</div>
-        </div>
-      `;
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
-    });
-  </script>
+  <script src="assets/util.js"></script>
+  <script src="assets/music.js"></script>
+  <script src="assets/app.js"></script>
 </body>
 </html>
