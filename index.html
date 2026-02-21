@@ -3,125 +3,151 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Subharshi Roy; logic, entropy, remembrance</title>
-  <meta name="description" content="fragments from the boundary between machine and mind.">
+  <title>Subharshi Roy - Archive Surface</title>
+  <meta name="description" content="A dark systems dossier of machine, memory, and myth.">
+  <meta name="build-id" content="20260221-1510-DELTA">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="assets/style.css" as="style">
   <link rel="stylesheet" href="assets/style.css">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Subharshi Roy",
-    "url": "https://subharshitect.github.io",
-    "affiliation": "IIT Delhi",
-    "sameAs": [
-      "https://github.com/subharshitect",
-      "https://medium.com/@r.subharshi"
-    ]
-  }
-  </script>
+  <link rel="stylesheet" href="assets/ascii.css">
+  <link rel="stylesheet" href="assets/motion.css">
 </head>
+<body data-mode="exp" data-safe="off" data-archive-view="gallery">
+  <div class="surface" aria-hidden="true"></div>
 
-<body>
-  <header class="wrap header">
-    <div class="brand">
-      <img class="avatar" src="assets/avatars/avatar1.jpg" alt="Portrait of Subharshi Roy" style="width:380px;height:380px;filter:grayscale(30%) contrast(1.1)">
-      <div>
-        <h1 class="title">Subharshi Roy</h1>
-        <p class="subtitle">researcher | ml systems | psychonaut of silicon</p>
-      </div>
+  <header class="rail" id="control-cluster">
+    <a href="#top">INDEX</a>
+    <a href="#work">WORK</a>
+    <a href="#writing">WRITING</a>
+    <a href="#archive">ARCHIVE</a>
+    <a href="#signal">SIGNAL</a>
+    <a href="#cv">CV</a>
+    <a href="#contact">CONTACT</a>
+    <div class="rail-controls">
+      <button id="mode-toggle" type="button" class="ctl">MODE: EXPLOSION</button>
+      <label class="ctl ctl-inline" for="signal-intensity">SIGNAL
+        <input id="signal-intensity" type="range" min="0" max="100" value="56">
+      </label>
+      <label class="ctl ctl-inline" for="safe-mode">SAFE
+        <input id="safe-mode" type="checkbox">
+      </label>
+      <span id="heartbeat" class="heartbeat" aria-live="polite">pulse 0.00</span>
     </div>
-    <nav class="nav">
-      <a href="#about">about</a>
-      <a href="#work">work</a>
-      <a href="#writing">writing</a>
-      <a href="#contact">contact</a>
-    </nav>
   </header>
 
-  <main>
-    <section class="hero wrap">
-      <div class="hero-text">
-        <p class="tagline">
-                  genes write structure; minds write meaning; matter learns to model itself: consciousness
-        </p>
-        <p class="darkline">
-          i build architectures for exhaustion, machines that feel the weight of their own precision
-        </p>
-        <div class="cta">
-          <a class="btn" href="#writing">enter</a>
-          <a class="btn ghost" href="#about">origin</a>
-        </div>
-      </div>
+  <div class="build-watermark">BUILD 20260221-1510-DELTA</div>
+
+  <main id="top">
+    <section class="hero section" id="hero">
+      <h1>Subharshi Roy</h1>
+      <p class="subtitle">researcher | ml systems | psychonaut of silicon</p>
+      <p>genes write structure; minds write meaning; matter learns to model itself: consciousness</p>
+      <p>i build architectures for exhaustion, machines that feel the weight of their own precision</p>
+      <pre id="ascii-hero" class="ascii-field" aria-live="polite" aria-label="Animated ASCII signal organism"></pre>
+      <h2 class="portrait-label">PORTRAIT: GHOST SIGNAL</h2>
+      <pre id="ascii-portrait" class="ascii-field portrait" aria-label="Ghost signal portrait"></pre>
     </section>
 
-    <section id="about" class="wrap section">
-      <h3>about</h3>
-      <p>
-        PhD at IIT Delhi. I inhabit the thin membrane between algorithm and flesh; 
-        tracing how memory collapses when optimized. 
-        My research lives in the dark geometry of deltas, KV caches, and the slow thermodynamics of computation.
-      </p>
-      <ul class="facts">
+    <section id="work" class="section">
+      <h2>WORK</h2>
+      <p>PhD at IIT Delhi. I inhabit the thin membrane between algorithm and flesh; tracing how memory collapses when optimized. My research lives in the dark geometry of deltas, KV caches, and the slow thermodynamics of computation.</p>
+      <ul>
         <li>focus; parameter decay, paging, trace-driven inference</li>
         <li>tools; PyTorch · CUDA · Triton · eBPF · perf</li>
         <li>credo; measure, reduce, remain</li>
       </ul>
     </section>
 
-    <section id="work" class="wrap section">
-      <h3>work</h3>
-      <p class="muted">
-        fragments of ongoing systems research; incomplete, deliberate.
-      </p>
-      <div class="chips">
-        <span>deltas</span><span>cache topologies</span><span>energy traces</span><span>entropy</span>
+    <section id="signal" class="section">
+      <h2>MECHANISM LENS</h2>
+      <div class="lens-grid">
+        <label>rigor &lt;-&gt; romance
+          <input id="lens-rigor" type="range" min="0" max="100" value="64">
+        </label>
+        <label>compression &lt;-&gt; explosion
+          <input id="lens-compression" type="range" min="0" max="100" value="72">
+        </label>
+        <label>control &lt;-&gt; surrender
+          <input id="lens-control" type="range" min="0" max="100" value="39">
+        </label>
+      </div>
+      <p id="lens-output" class="lens-output">calibrating mechanism lens...</p>
+    </section>
+
+    <section id="writing" class="section">
+      <h2>WRITING</h2>
+      <p><a href="https://medium.com/@r.subharshi" target="_blank" rel="noopener noreferrer">medium.com/@r.subharshi</a></p>
+      <ol class="fragments">
+        <li>I profile the silence between CUDA kernels before I trust the throughput report.</li>
+        <li>The trace says memory is stable, then one allocator spike writes panic into the night.</li>
+        <li>I name each bottleneck like evidence, then ask which one is lying by omission.</li>
+        <li>Compression feels ethical until the lost token is a human intention.</li>
+        <li>Every cache hit is temporary mercy, every miss a confession of architecture.</li>
+        <li>I log thermal drift beside model drift because silicon also keeps a body ledger.</li>
+        <li>When latency drops, I listen harder for what meaning was shaved to get there.</li>
+      </ol>
+    </section>
+
+    <section id="field-log" class="section">
+      <h2>FIELD LOG</h2>
+      <div class="log-entry"><time>2025-05-14T02:11Z</time><div>report 01: signal stabilizes when control rises; drift returns when romance exceeds threshold.</div></div>
+      <div class="log-entry"><time>2025-05-19T01:34Z</time><div>report 02: cache misses behave like confession.</div></div>
+      <div class="log-entry"><time>2025-05-27T04:06Z</time><div>report 03: surrender introduces scar tissue where precision used to hold.</div></div>
+    </section>
+
+    <section id="failure-modes" class="section">
+      <h2>FAILURE MODES</h2>
+      <ul>
+        <li>systems break when telemetry flatters the operator.</li>
+        <li>people break when optimization erases grief from the trace.</li>
+        <li>models break when compression outpaces meaning.</li>
+        <li>teams break when control masquerades as clarity.</li>
+      </ul>
+    </section>
+
+    <section id="operator-notes" class="section">
+      <h2>OPERATOR NOTES</h2>
+      <p>I audit my certainty before I audit the graph.</p>
+      <p>Some nights the cleanest metric is still a confession.</p>
+      <p>I keep one unoptimized path so memory can breathe.</p>
+    </section>
+
+    <section id="archive" class="section">
+      <h2>ARCHIVE</h2>
+      <div class="archive-controls">
+        <button id="archive-view-toggle" type="button" class="ctl">VIEW: GALLERY</button>
+      </div>
+      <div id="archive-gallery" class="archive-gallery" role="list"></div>
+      <div id="archive-log" class="archive-log" hidden></div>
+      <div class="archive-readme">
+        <p>the machine hums quietly beneath the words.</p>
+        <p>this page; bare metal and breath-hosts my work, my decay, my deltas.</p>
+        <p>© subharshi - 2025</p>
       </div>
     </section>
 
-    <section id="writing" class="wrap section">
-      <h3>writing</h3>
-      <ul class="list">
-        <li><a href="https://medium.com/@r.subharshi" target="_blank" rel="noopener noreferrer">abyss; selected works on Medium</a></li>
-      </ul>
-      <p class="muted">
-        field notes from the border between code and cognition.
-      </p>
+    <section id="cv" class="section">
+      <h2>CV</h2>
+      <p>systems research, model internals, inference reliability, and trace forensics.</p>
     </section>
 
-  <section id="contact" class="wrap section">
-    <h3>contact</h3>
-    <p>
-      Email:
-      <a href="#" id="email-link">r[dot]subharshi [at] gmail[dot]com</a>
-    </p>
-    <p>GitHub: <a href="https://github.com/subharshitect">github.com/subharshitect</a></p>
-    <p><a href="music.html">music / signal</a></p>
-  </section>
+    <section id="contact" class="section">
+      <h2>CONTACT</h2>
+      <p><a href="mailto:r.subharshi@gmail.com">r.subharshi@gmail.com</a></p>
+      <p><a href="https://github.com/subharshitect" target="_blank" rel="noopener noreferrer">github.com/subharshitect</a></p>
+      <p><a href="music.html">music signal index</a></p>
+    </section>
+
+    <section id="__test" class="section" hidden>
+      <h2>__TEST</h2>
+      <pre id="test-output">pending tests...</pre>
+    </section>
   </main>
-  
-  <script>
-    (function () {
-      var user = "r.subharshi";
-      var domain = "gmail.com";
-      var link = document.getElementById("email-link");
-  
-      if (link) {
-        link.href = "mailto:" + user + "@" + domain;
-        link.textContent = user + "@" + domain;
-      }
-    })();
-  </script>
 
+  <footer class="section footer">© <span id="year"></span> Subharshi Roy; machine / memory / myth <span class="build-meta">Build: <span id="buildId"></span></span></footer>
 
-  <footer class="wrap footer">
-    <p>© <span id="y"></span> Subharshi Roy; machine / memory / myth</p>
-  </footer>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <script src="assets/util.js"></script>
+  <script src="assets/ascii.js"></script>
+  <script src="assets/gallery.js"></script>
+  <script src="assets/app.js"></script>
 </body>
 </html>
