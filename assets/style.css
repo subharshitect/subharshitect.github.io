@@ -119,3 +119,41 @@ body[data-safe="on"] .ascii-field { animation: none !important; filter: none !im
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
+
+.build-watermark {
+  position: fixed;
+  right: 0.8rem;
+  bottom: 0.6rem;
+  font-size: 0.7rem;
+  opacity: 0.24;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+  z-index: 2;
+}
+.sigil {
+  margin: 0 0 0.45rem;
+  white-space: pre;
+  font-size: 0.5rem;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 70%, #ffc9f0 30%);
+  opacity: 0.8;
+  border: 1px dashed var(--line);
+  padding: 0.3rem;
+  max-width: 42ch;
+}
+.dossier-panel {
+  background: rgba(7, 11, 18, 0.5);
+}
+.panel-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.55rem;
+  align-items: center;
+}
+.panel-head h3 {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+}
+.ascii-label, .pulse { font-size: 0.76rem; color: var(--muted); }

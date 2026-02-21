@@ -11,6 +11,8 @@
   const r = U.qs("#lens-rigor");
   const c = U.qs("#lens-compression");
   const k = U.qs("#lens-control");
+  const buildMeta = U.qs('meta[name="build-id"]');
+  const buildOut = U.qs("#buildId");
 
   function parseModeQuery() {
     try {
@@ -111,6 +113,11 @@
   [r, c, k].forEach((el) => el && el.addEventListener("input", lensSentence));
 
   if (year) year.textContent = String(new Date().getFullYear());
+  if (buildMeta && buildOut) {
+    const bid = buildMeta.getAttribute("content") || "unknown";
+    buildOut.textContent = bid;
+    console.log(`[build] ${bid}`);
+  }
   lensSentence();
   runTests();
 })();
