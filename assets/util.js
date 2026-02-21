@@ -35,14 +35,6 @@
         s = (1664525 * s + 1013904223) >>> 0;
         return s / 4294967296;
       };
-    },
-    hash(str) {
-      let h = 2166136261 >>> 0;
-      for (let i = 0; i < str.length; i += 1) {
-        h ^= str.charCodeAt(i);
-        h = Math.imul(h, 16777619);
-      }
-      return h >>> 0;
     }
   };
   window.__UTIL__ = U;

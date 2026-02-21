@@ -8,15 +8,9 @@
   const safe = U.qs("#safe-mode");
   const year = U.qs("#year");
   const lensOut = U.qs("#lens-output");
-  const heartbeat = U.qs("#heartbeat");
-  const buildIdNode = U.qs("#buildId");
-  const pulseVal = U.qs("#pulseVal");
-  const debugLine = U.qs("#debugLine");
   const r = U.qs("#lens-rigor");
   const c = U.qs("#lens-compression");
   const k = U.qs("#lens-control");
-
-  const live = { signal: 56, phase: 0, pulse: 0, raf: 0 };
 
   function parseModeQuery() {
     try {
@@ -28,33 +22,19 @@
     } catch (_e) { return null; }
   }
 
-
-
-  function bindBuildId() {
-    const meta = U.qs('meta[name="build-id"]');
-    const buildId = meta?.getAttribute('content') || 'unknown';
-    if (buildIdNode) buildIdNode.textContent = buildId;
-    console.info('[build]', buildId);
-  }
-
   function applyMode(mode) {
     const m = mode === "cmp" ? "cmp" : "exp";
     document.body.dataset.mode = m;
     if (modeBtn) modeBtn.textContent = `MODE: ${m === "cmp" ? "COMPRESSION" : "EXPLOSION"}`;
     U.storageSet("mode", m);
-    window.dispatchEvent(new Event("mode-change"));
   }
 
   function applySignal(v) {
-    live.signal = U.clamp(Number(v) || 0, 0, 100);
-    U.storageSet("signal", Math.round(live.signal));
-  }
-
-  function materializeSignal(now) {
-    const n = now / 100;
-    document.documentElement.style.setProperty("--grain-strength", (0.08 + n * 0.42 + live.phase * 0.06).toFixed(3));
-    document.documentElement.style.setProperty("--glow-strength", (0.1 + n * 0.8 + live.phase * 0.03).toFixed(3));
-    document.documentElement.style.setProperty("--scan-strength", (0.05 + n * 0.35 + live.phase * 0.03).toFixed(3));
+    const n = U.clamp(Number(v) || 0, 0, 100) / 100;
+    document.documentElement.style.setProperty("--grain-strength", (0.08 + n * 0.42).toFixed(3));
+    document.documentElement.style.setProperty("--glow-strength", (0.1 + n * 0.8).toFixed(3));
+    document.documentElement.style.setProperty("--scan-strength", (0.05 + n * 0.35).toFixed(3));
+    U.storageSet("signal", Math.round(n * 100));
   }
 
   function applySafe(on) {
@@ -69,58 +49,10 @@
     const rigorWord = rv > 66 ? "forensic" : rv > 33 ? "balanced" : "lyrical";
     const compWord = cv > 66 ? "exploded" : cv > 33 ? "layered" : "compressed";
     const ctrlWord = kv > 66 ? "disciplined" : kv > 33 ? "adaptive" : "surrendered";
-    lensOut.textContent = `lens report: ${rigorWord} method, ${compWord} evidence, ${ctrlWord} operator state.`;
+    const sentence = `lens report: ${rigorWord} method, ${compWord} evidence, ${ctrlWord} operator state.`;
+    lensOut.textContent = sentence;
     document.body.dataset.lensSeed = String(Math.floor(rv * 3 + cv * 5 + kv * 7));
-    live.phase = 1;
-    window.dispatchEvent(new Event("phase-shift"));
     window.dispatchEvent(new Event("lens-change"));
-  }
-
-  function stampSigils() {
-    const build = U.qs('meta[name="build-id"]')?.getAttribute("content") || "build";
-    U.qsa('.sigil[data-sigil]').forEach((pre) => {
-      const chars = "|/\_=:;+*#@~^";
-      const sig = pre.getAttribute("data-sigil") || "x";
-      const rand = U.seeded(U.hash(`${build}::${sig}`));
-      const w = 18;
-      const h = 10;
-      const g = Array.from({ length: h }, () => Array(w).fill(" "));
-      for (let x = 2; x < w - 2; x += 1) { if (rand() > 0.3) g[1][x] = "="; if (rand() > 0.4) g[h - 2][x] = "="; }
-      for (let y = 2; y < h - 2; y += 1) { if (rand() > 0.35) g[y][2] = "|"; if (rand() > 0.42) g[y][w - 3] = "|"; }
-      for (let i = 0; i < 4; i += 1) {
-        const x0 = 3 + Math.floor(rand() * (w - 6));
-        const y0 = 2 + Math.floor(rand() * (h - 4));
-        g[y0][x0] = "+";
-        if (x0 + 1 < w) g[y0][x0 + 1] = rand() > 0.5 ? "_" : "-";
-        if (y0 + 1 < h) g[y0 + 1][x0] = rand() > 0.5 ? ":" : "|";
-      }
-      const cx = Math.floor(w / 2);
-      const cy = Math.floor(h / 2);
-      g[cy][cx - 1] = "*"; g[cy][cx] = "@"; g[cy][cx + 1] = "#";
-      g[cy + 2][cx - 1] = "~"; g[cy + 2][cx] = "^"; g[cy + 2][cx + 1] = "~";
-      pre.textContent = g.map((r) => r.join("")).join("\n");
-    });
-  }
-
-  function animateCluster() {
-    const reduced = U.prefersReducedMotion();
-    if (reduced) {
-      materializeSignal(live.signal);
-      return;
-    }
-    const loop = () => {
-      const current = Number(getComputedStyle(document.documentElement).getPropertyValue("--grain-strength")) || 0.28;
-      const targetGrain = 0.08 + (live.signal / 100) * 0.42 + live.phase * 0.06;
-      const smoothed = U.lerp(current, targetGrain, 0.11);
-      const nowSignal = U.clamp((smoothed - 0.08) / 0.42 * 100, 0, 100);
-      materializeSignal(nowSignal);
-      live.phase = Math.max(0, live.phase * 0.93 - 0.004);
-      const pulse = live.pulse;
-      document.documentElement.style.setProperty("--cluster-pulse", (pulse * 3).toFixed(3));
-      document.documentElement.style.setProperty("--phase-boost", live.phase.toFixed(3));
-      live.raf = requestAnimationFrame(loop);
-    };
-    if (!live.raf) live.raf = requestAnimationFrame(loop);
   }
 
   function runTests() {
@@ -133,21 +65,28 @@
     const rows = [];
 
     try {
+      const p = window.__MUSIC_TEST__?.parseYouTubeId;
+      if (p) {
+        rows.push(p("https://www.youtube.com/watch?v=abc123xyz09") === "abc123xyz09" ? "PASS youtube watch" : "FAIL youtube watch");
+        rows.push(p("https://youtu.be/abc123xyz09?t=1") === "abc123xyz09" ? "PASS youtube short" : "FAIL youtube short");
+        rows.push(p("https://www.youtube.com/shorts/abc123xyz09?feature=share") === "abc123xyz09" ? "PASS youtube shorts" : "FAIL youtube shorts");
+      } else {
+        rows.push("PASS youtube tests skipped on index");
+      }
+    } catch (_e) { rows.push("FAIL youtube parser exception"); }
+
+    try {
       applyMode("cmp");
-      rows.push(U.storageGet("mode", "exp") === "cmp" ? "PASS mode persistence" : "FAIL mode persistence");
+      const ok = U.storageGet("mode", "exp") === "cmp";
+      rows.push(ok ? "PASS mode persistence" : "FAIL mode persistence");
       applyMode("exp");
     } catch (_e) { rows.push("FAIL mode persistence exception"); }
 
     try {
       applySignal(70);
-      materializeSignal(70);
       const a = getComputedStyle(document.documentElement).getPropertyValue("--grain-strength").trim();
       rows.push(a ? "PASS slider updates" : "FAIL slider updates");
     } catch (_e) { rows.push("FAIL slider updates exception"); }
-
-    try {
-      rows.push(parseModeQuery() === "cmp" || parseModeQuery() === "exp" || parseModeQuery() === null ? "PASS mode query parse" : "FAIL mode query parse");
-    } catch (_e) { rows.push("FAIL mode query parse exception"); }
 
     out.textContent = rows.join("\n");
   }
@@ -157,50 +96,21 @@
   const sVal = U.storageGet("signal", 56);
   if (signal) signal.value = String(sVal);
   applySignal(sVal);
-  materializeSignal(sVal);
   const safeVal = U.storageGet("safe-mode", false);
   if (safe) safe.checked = !!safeVal;
   applySafe(!!safeVal);
 
-  if (modeBtn) modeBtn.addEventListener("click", () => applyMode(document.body.dataset.mode === "cmp" ? "exp" : "cmp"));
+  if (modeBtn) {
+    modeBtn.addEventListener("click", () => applyMode(document.body.dataset.mode === "cmp" ? "exp" : "cmp"));
+  }
   document.addEventListener("keydown", (e) => {
-    const tag = (e.target && e.target.tagName ? e.target.tagName.toLowerCase() : "");
-    if (tag === "input" || tag === "textarea") return;
     if (e.key.toLowerCase() === "e") applyMode(document.body.dataset.mode === "cmp" ? "exp" : "cmp");
-    if (e.key === "0") {
-      const next = !(document.body.dataset.safe === "on");
-      if (safe) safe.checked = next;
-      applySafe(next);
-    }
-    if (e.key.toLowerCase() === "d" && debugLine) {
-      debugLine.hidden = !debugLine.hidden;
-    }
-    if (e.key === "[" || e.key === "]") {
-      const delta = e.key === "[" ? -3 : 3;
-      const now = U.clamp((Number(signal?.value || live.signal) + delta), 0, 100);
-      if (signal) signal.value = String(now);
-      applySignal(now);
-      live.phase = 1;
-      window.dispatchEvent(new Event("phase-shift"));
-    }
   });
-  if (signal) signal.addEventListener("input", (e) => { applySignal(e.target.value); live.phase = 1; window.dispatchEvent(new Event("phase-shift")); });
+  if (signal) signal.addEventListener("input", (e) => applySignal(e.target.value));
   if (safe) safe.addEventListener("change", (e) => applySafe(e.target.checked));
   [r, c, k].forEach((el) => el && el.addEventListener("input", lensSentence));
 
-  window.addEventListener("organism-heartbeat", (e) => {
-    const ent = U.clamp(Number(e.detail?.entropy) || 0, 0, 1);
-    live.pulse = U.lerp(live.pulse, ent, 0.25);
-    const bpm = Math.round(40 + ent * 120);
-    if (heartbeat) heartbeat.textContent = `PULSE: ${bpm}`;
-    if (pulseVal) pulseVal.textContent = String(bpm);
-    if (debugLine && !debugLine.hidden) debugLine.textContent = `debug entropy=${ent.toFixed(3)} phase=${live.phase.toFixed(3)}`;
-  });
-
   if (year) year.textContent = String(new Date().getFullYear());
-  bindBuildId();
-  stampSigils();
   lensSentence();
-  animateCluster();
   runTests();
 })();

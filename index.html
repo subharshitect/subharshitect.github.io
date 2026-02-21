@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Subharshi Roy - Archive Surface</title>
   <meta name="description" content="A dark systems dossier of machine, memory, and myth.">
-  <meta name="build-id" content="20260221-1545-OMEGA">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/ascii.css">
@@ -14,7 +13,7 @@
 <body data-mode="exp" data-safe="off" data-archive-view="gallery">
   <div class="surface" aria-hidden="true"></div>
 
-  <header class="rail" id="control-cluster">
+  <header class="rail">
     <a href="#top">INDEX</a>
     <a href="#work">WORK</a>
     <a href="#writing">WRITING</a>
@@ -30,35 +29,19 @@
       <label class="ctl ctl-inline" for="safe-mode">SAFE
         <input id="safe-mode" type="checkbox">
       </label>
-      <span id="heartbeat" class="heartbeat" aria-live="polite">pulse 0.00</span>
     </div>
   </header>
 
-  <div class="build-watermark">BUILD 20260221-1545-OMEGA</div>
-
   <main id="top">
-    <section class="hero section" id="hero">
-      <pre class="sigil" data-sigil="hero" aria-hidden="true"></pre>
+    <section class="hero section">
       <h1>Subharshi Roy</h1>
       <p class="subtitle">researcher | ml systems | psychonaut of silicon</p>
       <p>genes write structure; minds write meaning; matter learns to model itself: consciousness</p>
       <p>i build architectures for exhaustion, machines that feel the weight of their own precision</p>
-      <pre id="ascii-hero" class="ascii-field" aria-live="polite" aria-label="Animated ASCII signal organism"></pre>
-    </section>
-
-    <section id="portrait" class="wrap section dossier-panel">
-      <pre class="sigil" data-sigil="portrait" aria-hidden="true"></pre>
-      <div class="panel-head">
-        <h3>portrait</h3>
-        <div class="ascii-label">PORTRAIT: GHOST SIGNAL</div>
-        <div class="pulse">PULSE: <span id="pulseVal">--</span></div>
-        <div class="debugline" id="debugLine" hidden>debug</div>
-      </div>
-      <pre id="ascii-portrait" class="ascii-portrait" aria-label="Ghost portrait signal"></pre>
+      <pre id="ascii-hero" class="ascii-field" aria-live="polite" aria-label="Animated ASCII signal field"></pre>
     </section>
 
     <section id="work" class="section">
-      <pre class="sigil" data-sigil="work" aria-hidden="true"></pre>
       <h2>WORK</h2>
       <p>PhD at IIT Delhi. I inhabit the thin membrane between algorithm and flesh; tracing how memory collapses when optimized. My research lives in the dark geometry of deltas, KV caches, and the slow thermodynamics of computation.</p>
       <ul>
@@ -69,7 +52,6 @@
     </section>
 
     <section id="signal" class="section">
-      <pre class="sigil" data-sigil="signal" aria-hidden="true"></pre>
       <h2>MECHANISM LENS</h2>
       <div class="lens-grid">
         <label>rigor &lt;-&gt; romance
@@ -86,7 +68,6 @@
     </section>
 
     <section id="writing" class="section">
-      <pre class="sigil" data-sigil="writing" aria-hidden="true"></pre>
       <h2>WRITING</h2>
       <p><a href="https://medium.com/@r.subharshi" target="_blank" rel="noopener noreferrer">medium.com/@r.subharshi</a></p>
       <ol class="fragments">
@@ -100,35 +81,7 @@
       </ol>
     </section>
 
-    <section id="field-log" class="section">
-      <pre class="sigil" data-sigil="field-log" aria-hidden="true"></pre>
-      <h2>FIELD LOG</h2>
-      <div class="log-entry"><time>2025-05-14T02:11Z</time><div>report 01: signal stabilizes when control rises; drift returns when romance exceeds threshold.</div></div>
-      <div class="log-entry"><time>2025-05-19T01:34Z</time><div>report 02: cache misses behave like confession.</div></div>
-      <div class="log-entry"><time>2025-05-27T04:06Z</time><div>report 03: surrender introduces scar tissue where precision used to hold.</div></div>
-    </section>
-
-    <section id="failure-modes" class="section">
-      <pre class="sigil" data-sigil="failure-modes" aria-hidden="true"></pre>
-      <h2>FAILURE MODES</h2>
-      <ul>
-        <li>systems break when telemetry flatters the operator.</li>
-        <li>people break when optimization erases grief from the trace.</li>
-        <li>models break when compression outpaces meaning.</li>
-        <li>teams break when control masquerades as clarity.</li>
-      </ul>
-    </section>
-
-    <section id="operator-notes" class="section">
-      <pre class="sigil" data-sigil="operator-notes" aria-hidden="true"></pre>
-      <h2>OPERATOR NOTES</h2>
-      <p>I audit my certainty before I audit the graph.</p>
-      <p>Some nights the cleanest metric is still a confession.</p>
-      <p>I keep one unoptimized path so memory can breathe.</p>
-    </section>
-
     <section id="archive" class="section">
-      <pre class="sigil" data-sigil="archive" aria-hidden="true"></pre>
       <h2>ARCHIVE</h2>
       <div class="archive-controls">
         <button id="archive-view-toggle" type="button" class="ctl">VIEW: GALLERY</button>
@@ -143,13 +96,11 @@
     </section>
 
     <section id="cv" class="section">
-      <pre class="sigil" data-sigil="cv" aria-hidden="true"></pre>
       <h2>CV</h2>
       <p>systems research, model internals, inference reliability, and trace forensics.</p>
     </section>
 
     <section id="contact" class="section">
-      <pre class="sigil" data-sigil="contact" aria-hidden="true"></pre>
       <h2>CONTACT</h2>
       <p><a href="mailto:r.subharshi@gmail.com">r.subharshi@gmail.com</a></p>
       <p><a href="https://github.com/subharshitect" target="_blank" rel="noopener noreferrer">github.com/subharshitect</a></p>
@@ -162,7 +113,7 @@
     </section>
   </main>
 
-  <footer class="section footer">© <span id="year"></span> Subharshi Roy; machine / memory / myth <span class="build-meta">Build: <span id="buildId"></span></span></footer>
+  <footer class="section footer">© <span id="year"></span> Subharshi Roy; machine / memory / myth</footer>
 
   <script src="assets/util.js"></script>
   <script src="assets/ascii.js"></script>

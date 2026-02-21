@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Signal Music Grid</title>
   <meta name="description" content="Signal-tagged tracks and ASCII thumbnails.">
-  <meta name="build-id" content="20260221-1545-OMEGA">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/ascii.css">
@@ -20,8 +19,6 @@
     </div>
   </header>
 
-  <div class="build-watermark">BUILD 20260221-1545-OMEGA</div>
-
   <main class="section">
     <h1>MUSIC</h1>
     <p>dense signal map - filtered by emotional kinetics.</p>
@@ -34,15 +31,12 @@
       <button type="button" data-tag="FERAL" class="chip">FERAL</button>
       <button type="button" data-tag="NOCTURNE" class="chip">NOCTURNE</button>
       <button type="button" data-tag="RITUAL" class="chip">RITUAL</button>
-      <label class="ctl ctl-inline" for="external-thumbs">EXT THUMBS
-        <input id="external-thumbs" type="checkbox">
-      </label>
     </div>
 
     <section id="music-grid" class="music-grid" aria-live="polite"></section>
   </main>
 
-  <footer class="section footer">© <span id="year"></span> Subharshi Roy; machine / memory / myth <span class="build-meta">Build: <span id="buildId"></span></span></footer>
+  <footer class="section footer">© <span id="year"></span> Subharshi Roy; machine / memory / myth</footer>
 
   <script src="assets/util.js"></script>
   <script src="assets/music.js"></script>

@@ -3,21 +3,19 @@
   50% { transform: translate3d(0, -2px, 0); }
   100% { transform: translate3d(0, 0, 0); }
 }
-@keyframes sigilFade {
-  0% { opacity: 0.16; }
-  50% { opacity: 0.33; }
-  100% { opacity: 0.16; }
+
+.tile {
+  animation: drift 9s linear infinite;
 }
 
-.tile { animation: drift 10s linear infinite; }
-.sigil { animation: sigilFade 8s linear infinite; }
-
 body[data-safe="on"] .tile,
-body[data-safe="on"] .song-tile,
-body[data-safe="on"] .sigil { animation: none; }
+body[data-safe="on"] .song-tile {
+  animation: none;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .tile,
-  .song-tile,
-  .sigil { animation: none; }
+  .song-tile {
+    animation: none;
+  }
 }

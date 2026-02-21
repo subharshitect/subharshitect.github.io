@@ -5,23 +5,17 @@
   white-space: pre;
   overflow: hidden;
   font-size: 0.66rem;
-  line-height: 1.04;
+  line-height: 1.05;
   letter-spacing: 0.01em;
   border: 1px solid var(--line);
   background: rgba(3, 5, 8, 0.88);
-  color: color-mix(in srgb, var(--accent) 72%, #ffffff 28%);
+  color: color-mix(in srgb, var(--accent) 75%, #ffffff 25%);
   padding: 0.45rem;
 }
 .ascii-field {
   width: 100%;
   min-height: 260px;
   max-height: 260px;
-}
-.portrait {
-  margin-top: 0.55rem;
-  min-height: 180px;
-  max-height: 180px;
-  color: color-mix(in srgb, var(--accent) 60%, #dcefff 40%);
 }
 .ascii-mini {
   min-height: 72px;
@@ -31,10 +25,3 @@
   min-height: 84px;
   max-height: 84px;
 }
-
-.dossier-panel { position: relative; }
-.panel-head { display: grid; gap: 0.25rem; margin-bottom: 0.45rem; }
-.ascii-label { color: var(--muted); letter-spacing: 0.08em; font-size: 0.75rem; }
-.pulse { color: color-mix(in srgb, var(--accent) 52%, var(--text) 48%); opacity: 0.78; font-size: 0.75rem; }
-.debugline { color: var(--muted); font-size: 0.68rem; }
-.ascii-portrait { white-space: pre; font-family: ui-monospace, monospace; font-size: 12px; line-height: 1.05; opacity: 0.92; margin: 0; border: 1px solid var(--line); background: rgba(3,5,8,0.88); padding: 0.45rem; overflow: hidden; }
