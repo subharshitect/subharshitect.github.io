@@ -1,0 +1,21 @@
+@keyframes drift {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -2px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+.tile {
+  animation: drift 9s linear infinite;
+}
+
+body[data-safe="on"] .tile,
+body[data-safe="on"] .song-tile {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile,
+  .song-tile {
+    animation: none;
+  }
+}
