@@ -224,7 +224,7 @@
       state.frame += 1;
       renderAll();
     }
-    state.raf = requestAnimationFrame(tick);
+    portraitEl.textContent = out.join("\n");
   }
 
   function sync() {
