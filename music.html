@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Signal Music Grid</title>
   <meta name="description" content="Signal-tagged tracks and ASCII thumbnails.">
+  <meta name="build-id" content="20260221-1200-A1F7">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/ascii.css">
 </head>
 <body data-mode="exp" data-safe="off">
+  <div class="build-watermark">BUILD 20260221-1200-A1F7</div>
   <div class="surface" aria-hidden="true"></div>
   <header class="rail">
     <a href="index.html">INDEX</a>
@@ -20,6 +22,7 @@
   </header>
 
   <main class="section">
+    <pre class="sigil" data-sigil="music" aria-hidden="true"></pre>
     <h1>MUSIC</h1>
     <p>dense signal map - filtered by emotional kinetics.</p>
 
@@ -36,7 +39,7 @@
     <section id="music-grid" class="music-grid" aria-live="polite"></section>
   </main>
 
-  <footer class="section footer">© <span id="year"></span> Subharshi Roy; machine / memory / myth</footer>
+  <footer class="section footer">© <span id="year"></span> Subharshi Roy; machine / memory / myth · Build: <span id="buildId"></span></footer>
 
   <script src="assets/util.js"></script>
   <script src="assets/music.js"></script>

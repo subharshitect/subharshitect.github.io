@@ -25,3 +25,17 @@
   min-height: 84px;
   max-height: 84px;
 }
+
+.ascii-portrait {
+  margin: 0.5rem 0 0;
+  white-space: pre;
+  overflow: hidden;
+  font-size: 0.58rem;
+  line-height: 1.02;
+  border: 1px solid var(--line);
+  background: rgba(2, 4, 7, 0.92);
+  color: color-mix(in srgb, #ffdfef 40%, var(--accent) 60%);
+  padding: 0.5rem;
+  min-height: 220px;
+  max-height: 220px;
+}
