@@ -157,15 +157,3 @@ body[data-safe="on"] .ascii-field { animation: none !important; filter: none !im
   font-size: 0.82rem;
 }
 .ascii-label, .pulse { font-size: 0.76rem; color: var(--muted); }
-
-.ascii-section {
-  min-height: 120px;
-  max-height: 120px;
-  margin-top: 0.6rem;
-}
-.section-diag {
-  margin-top: 0.35rem;
-  font-size: 0.68rem;
-  color: var(--muted);
-  letter-spacing: 0.04em;
-}
