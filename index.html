@@ -22,12 +22,12 @@
     <a href="#cv">CV</a>
     <a href="#contact">CONTACT</a>
     <div class="rail-controls">
-      <button id="mode-toggle" type="button" class="ctl">MODE: EXPLOSION</button>
-      <label class="ctl ctl-inline" for="signal-intensity">SIGNAL
-        <input id="signal-intensity" type="range" min="0" max="100" value="56">
+      <button id="mode-toggle" type="button" class="ctl" aria-label="Toggle mode">MODE</button>
+      <label class="ctl ctl-inline" for="signal-intensity"><span class="rail-label">SIG</span>
+        <input id="signal-intensity" type="range" min="0" max="100" value="56" aria-label="Signal intensity">
       </label>
-      <label class="ctl ctl-inline" for="safe-mode">SAFE
-        <input id="safe-mode" type="checkbox">
+      <label class="ctl ctl-inline" for="safe-mode"><span class="rail-label">SAFE</span>
+        <input id="safe-mode" type="checkbox" aria-label="Safe mode">
       </label>
     </div>
   </header>
@@ -85,7 +85,7 @@
     <section id="archive" class="section">
       <h2>ARCHIVE</h2>
       <div class="archive-controls">
-        <button id="archive-view-toggle" type="button" class="ctl">VIEW: GALLERY</button>
+        <button id="archive-view-toggle" type="button" class="ctl" aria-label="Toggle view">LOG</button>
       </div>
       <div id="archive-gallery" class="archive-gallery" role="list"></div>
       <div id="archive-log" class="archive-log" hidden></div>

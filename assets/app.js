@@ -25,7 +25,7 @@
   function applyMode(mode) {
     const m = mode === "cmp" ? "cmp" : "exp";
     document.body.dataset.mode = m;
-    if (modeBtn) modeBtn.textContent = `MODE: ${m === "cmp" ? "COMPRESSION" : "EXPLOSION"}`;
+    if (modeBtn) modeBtn.textContent = m === "cmp" ? "CMP" : "EXP";
     U.storageSet("mode", m);
   }
 

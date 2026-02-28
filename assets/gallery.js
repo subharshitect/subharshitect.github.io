@@ -8,7 +8,7 @@
   const toggle = U.qs("#archive-view-toggle");
   if (!gallery || !log || !toggle) return;
 
-  const tiles = [
+  const traces = [
     ["TRACE-001", "cache churn plateau", "KV eviction pattern resolves into thermodynamic debt."],
     ["TRACE-009", "allocator ghost", "memory climbs with no gradient pressure then collapses at dawn."],
     ["TRACE-014", "precision scar", "quantization recovers speed but amputates an intention."],
@@ -25,15 +25,16 @@
     ["2025-05-11T04:01:00Z", "safety pass - safe mode now halts loops on hidden tab and reduced motion"]
   ];
 
-  const mini = ["..::--==", "==++**##", "##%%@@%%", "**++==--"];
+  const asciiStrip = "..::--==++**##%%@@";
 
-  gallery.innerHTML = tiles.map((t, i) => `
-    <article class="tile" role="listitem" tabindex="0" data-i="${i}">
-      <div class="tile-inner">
-        <div class="meta">${t[0]} - ${t[1]}</div>
-        <pre class="ascii-mini">${mini.join("\n")}</pre>
-        <div>${t[2]}</div>
-        <div class="deep">expanded layer: scheduler residue, cache temperatures, and witness timestamps remain visible in explosion mode.</div>
+  gallery.innerHTML = traces.map((t, i) => `
+    <article class="artifact" role="listitem" tabindex="0" data-i="${i}" style="margin-left: ${(i % 3) * 0.75}rem">
+      <div class="artifact-inner">
+        <span class="artifact-id">${t[0]}</span>
+        <span class="artifact-title">${t[1]}</span>
+        <p class="artifact-fragment">${t[2]}</p>
+        <pre class="ascii-strip" aria-hidden="true">${asciiStrip}</pre>
+        <div class="artifact-deep">expanded layer: scheduler residue, cache temperatures, witness timestamps.</div>
       </div>
     </article>
   `).join("");
@@ -47,7 +48,7 @@
     document.body.dataset.archiveView = v;
     gallery.hidden = v !== "gallery";
     log.hidden = v !== "log";
-    toggle.textContent = `VIEW: ${v.toUpperCase()}`;
+    toggle.textContent = v === "gallery" ? "LOG" : "TRACES";
     U.storageSet("archive-view", v);
   }
 
@@ -57,20 +58,20 @@
 
   const drift = { mx: 0, my: 0, sy: 0 };
   let paintScheduled = false;
-  const allTiles = () => U.qsa(".tile", gallery);
+  const allArtifacts = () => U.qsa(".artifact", gallery);
 
   function paint() {
     paintScheduled = false;
     const safe = document.body.dataset.safe === "on" || U.prefersReducedMotion();
     if (safe) {
-      allTiles().forEach((tile) => { tile.style.transform = "translate3d(0,0,0)"; });
+      allArtifacts().forEach((el) => { el.style.transform = "translate3d(0,0,0)"; });
       return;
     }
-    allTiles().forEach((tile, i) => {
-      const f = (i + 1) * 0.7;
-      const dx = (drift.mx - 0.5) * f * 8;
-      const dy = (drift.my - 0.5) * f * 8 + drift.sy * (0.008 * f);
-      tile.style.transform = `translate3d(${dx.toFixed(2)}px, ${dy.toFixed(2)}px, 0)`;
+    allArtifacts().forEach((el, i) => {
+      const f = (i + 1) * 0.5;
+      const dx = (drift.mx - 0.5) * f * 6;
+      const dy = (drift.my - 0.5) * f * 6 + drift.sy * (0.006 * f);
+      el.style.transform = `translate3d(${dx.toFixed(2)}px, ${dy.toFixed(2)}px, 0)`;
     });
   }
 
