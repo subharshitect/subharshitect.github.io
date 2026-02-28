@@ -237,38 +237,60 @@ button.ctl { min-width: 2.5rem; }
 
 body[data-safe="on"] .signal-trace { animation: none; }
 
-/* ASCII art blocks: cellular, emergent, neural */
-.ascii-art-grid {
+/* ASCII art: asymmetric surface — emergent dominant, cellular + neural as readouts */
+.ascii-art-surface {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--space);
-  margin-top: var(--space-lg);
+  grid-template-columns: 1fr 2.2fr 1fr;
+  grid-template-rows: auto;
+  gap: 0;
+  margin-top: var(--space-xl);
+  border-top: 1px solid var(--line);
+  padding-top: var(--space);
 }
 
-.ascii-art-block {
+.ascii-art-panel {
+  display: flex;
+  flex-direction: column;
   border-left: 1px solid var(--line);
   padding-left: var(--space);
+  min-height: 0;
 }
 
+.ascii-art-panel:first-child { border-left: none; padding-left: 0; }
+
 .ascii-art-label {
-  display: block;
-  font-size: 0.55rem;
-  letter-spacing: 0.25em;
+  font-size: 0.5rem;
+  letter-spacing: 0.3em;
   color: var(--muted);
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.4rem;
+  opacity: 0.8;
 }
 
 .ascii-art-field {
   margin: 0;
   white-space: pre;
   overflow: hidden;
-  font-size: 0.5rem;
-  line-height: 1.05;
-  letter-spacing: 0.02em;
+  font-size: 0.48rem;
+  line-height: 1.04;
+  letter-spacing: 0.03em;
   border: none;
   background: transparent;
-  color: color-mix(in srgb, var(--accent) 55%, var(--text-soft) 45%);
-  min-height: 120px;
+  color: color-mix(in srgb, var(--accent) 60%, var(--text-soft) 40%);
+  min-height: 140px;
+}
+
+.ascii-art-cellular .ascii-art-field { font-size: 0.46rem; min-height: 160px; }
+.ascii-art-emergent .ascii-art-field { font-size: 0.5rem; min-height: 180px; }
+.ascii-art-neural .ascii-art-field { font-size: 0.46rem; min-height: 160px; }
+
+@media (max-width: 900px) {
+  .ascii-art-surface {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  .ascii-art-panel { border-left: 1px solid var(--line); padding-left: var(--space); }
+  .ascii-art-panel:first-child { border-left: 1px solid var(--line); padding-left: var(--space); }
+  .ascii-art-emergent .ascii-art-field { min-height: 200px; }
 }
 
 /* Gallery section: placeholder for your images */
