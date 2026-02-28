@@ -14,29 +14,108 @@
     return CHARS[Math.floor(U.clamp(v, 0, 0.999) * CHAR_LEN)];
   }
 
-  /* ——— 1D Cellular Automata: Rule 30 (Wolfram) ———
-   * Next cell = XOR(left, current, right). Renders as 2D history (time downward).
-   * Produces the classic fractal/chaotic triangle. */
+  /* ——— Gray-Scott reaction-diffusion (Turing patterns) ———
+   * du/dt = Du·∇²u - u·v² + F·(1-u)
+   * dv/dt = Dv·∇²v + u·v² - (F+k)·v
+   * Double-buffered, small dt, classic spot/stripe parameters. */
+  const emergentEl = U.qs("#ascii-emergent");
+  if (emergentEl) {
+    const W = 120;
+    const H = 44;
+    const Du = 0.2097;
+    const Dv = 0.105;
+    const F = 0.037;
+    const k = 0.06;
+    const dt = 0.02;
+    const substeps = 25;
+
+    let u0 = Array(H).fill(null).map(() => Array(W).fill(1));
+    let v0 = Array(H).fill(null).map(() => Array(W).fill(0));
+    let u1 = Array(H).fill(null).map(() => Array(W).fill(0));
+    let v1 = Array(H).fill(null).map(() => Array(W).fill(0));
+
+    const cx = Math.floor(W / 2), cy = Math.floor(H / 2);
+    for (let dy = -4; dy <= 4; dy++)
+      for (let dx = -4; dx <= 4; dx++)
+        if (dx * dx + dy * dy <= 16) {
+          const y = (cy + dy + H) % H, x = (cx + dx + W) % W;
+          u0[y][x] = 0.5;
+          v0[y][x] = 0.25;
+        }
+
+    function laplacian(M, y, x) {
+      const ym = (y - 1 + H) % H, yp = (y + 1) % H;
+      const xm = (x - 1 + W) % W, xp = (x + 1) % W;
+      return M[ym][x] + M[yp][x] + M[y][xm] + M[y][xp] - 4 * M[y][x];
+    }
+
+    function step() {
+      for (let s = 0; s < substeps; s++) {
+        for (let y = 0; y < H; y++)
+          for (let x = 0; x < W; x++) {
+            const u = u0[y][x], v = v0[y][x];
+            const lapU = laplacian(u0, y, x);
+            const lapV = laplacian(v0, y, x);
+            const uvv = u * v * v;
+            const du = Du * lapU - uvv + F * (1 - u);
+            const dv = Dv * lapV + uvv - (F + k) * v;
+            u1[y][x] = Math.max(0, Math.min(1.2, u + dt * du));
+            v1[y][x] = Math.max(0, Math.min(1.2, v + dt * dv));
+          }
+        let tmp = u0; u0 = u1; u1 = tmp;
+        tmp = v0; v0 = v1; v1 = tmp;
+      }
+    }
+
+    function render() {
+      const lines = u0.map((row, y) =>
+        row.map((_, x) => {
+          const u = u0[y][x], v = v0[y][x];
+          const display = (1 - u) * 0.6 + v * 0.4;
+          return valToChar(U.clamp(display, 0, 1));
+        }).join("")
+      ).join("\n");
+      emergentEl.textContent = lines;
+    }
+
+    for (let i = 0; i < 180; i++) step();
+    render();
+
+    let raf = 0, last = 0;
+    function tick(ts) {
+      if (!emergentEl.isConnected) return;
+      if (ts - last > 45) {
+        last = ts;
+        step();
+        render();
+      }
+      if (shouldRun()) raf = requestAnimationFrame(tick);
+    }
+    if (shouldRun()) raf = requestAnimationFrame(tick);
+    window.addEventListener("safe-mode-change", () => {
+      if (!shouldRun()) cancelAnimationFrame(raf);
+      else if (emergentEl.isConnected) raf = requestAnimationFrame(tick);
+    });
+  }
+
+  /* ——— Simple 1D automaton: Rule 90 (Sierpiński) ———
+   * Clean fractal, reliable. Next = XOR(left, right). */
   const cellularEl = U.qs("#ascii-cellular");
   if (cellularEl) {
-    const W = 79;
-    const H = 28;
+    const W = 61;
+    const H = 24;
     let row = Array(W).fill(0);
     row[Math.floor(W / 2)] = 1;
     const history = [row.slice()];
 
-    function rule30(l, c, r) {
-      const idx = (l << 2) | (c << 1) | r;
-      return [0, 1, 1, 1, 1, 0, 0, 0][idx];
-    }
+    function rule90(l, r) { return l ^ r; }
 
     function step() {
       const next = [];
       for (let x = 0; x < W; x++) {
         const l = row[(x - 1 + W) % W];
-        const m = row[x];
         const r = row[(x + 1) % W];
-        next.push(rule30(l, m, r));
+        next.push(rule90(l, r));
       }
       row = next;
       history.push(row.slice());
@@ -46,10 +125,7 @@
     function render() {
       const lines = history.map((r, i) => {
         const age = 1 - (history.length - 1 - i) / H;
-        return r.map((v, x) => {
-          const t = v * (0.4 + 0.6 * age);
-          return valToChar(t);
-        }).join("");
+        return r.map(v => valToChar(v * (0.5 + 0.5 * age))).join("");
       }).join("\n");
       cellularEl.textContent = lines;
     }
@@ -57,7 +133,7 @@
     let raf = 0, last = 0;
     function tick(ts) {
       if (!cellularEl.isConnected) return;
-      if (ts - last > 80) {
+      if (ts - last > 90) {
         last = ts;
         step();
         render();
@@ -72,110 +148,30 @@
     });
   }
 
-  /* ——— Gray-Scott reaction-diffusion (Turing patterns) ———
-   * du/dt = Du·∇²u - u·v² + F·(1-u)
-   * dv/dt = Dv·∇²v + u·v² - (F+k)·v
-   * Parameters: F=0.037, k=0.06 → spots; F=0.014, k=0.054 → stripes. */
-  const emergentEl = U.qs("#ascii-emergent");
-  if (emergentEl) {
-    const W = 100;
-    const H = 38;
-    const Du = 0.2097;
-    const Dv = 0.105;
-    const F = 0.037;
-    const k = 0.06;
-
-    let U_grid = Array(H).fill(null).map(() => Array(W).fill(1));
-    let V_grid = Array(H).fill(null).map(() => Array(W).fill(0));
-    const seed = U.seeded(42);
-    for (let y = 0; y < H; y++)
-      for (let x = 0; x < W; x++) {
-        if (seed() < 0.002) {
-          U_grid[y][x] = 0.5;
-          V_grid[y][x] = 0.25;
-        }
-      }
-    U_grid[Math.floor(H / 2)][Math.floor(W / 2)] = 0.5;
-    V_grid[Math.floor(H / 2)][Math.floor(W / 2)] = 0.25;
-
-    function laplacian(M) {
-      const L = Array(H).fill(null).map(() => Array(W).fill(0));
-      for (let y = 0; y < H; y++)
-        for (let x = 0; x < W; x++) {
-          const ym = (y - 1 + H) % H, yp = (y + 1) % H;
-          const xm = (x - 1 + W) % W, xp = (x + 1) % W;
-          L[y][x] = M[ym][x] + M[yp][x] + M[y][xm] + M[y][xp] - 4 * M[y][x];
-        }
-      return L;
-    }
-
-    const dtSafe = 0.4;
-    function step() {
-      const Lu = laplacian(U_grid);
-      const Lv = laplacian(V_grid);
-      const U_next = Array(H).fill(null).map(() => Array(W).fill(0));
-      const V_next = Array(H).fill(null).map(() => Array(W).fill(0));
-      for (let y = 0; y < H; y++)
-        for (let x = 0; x < W; x++) {
-          const u = U_grid[y][x], v = V_grid[y][x];
-          const uv2 = u * v * v;
-          U_next[y][x] = u + dtSafe * (Du * Lu[y][x] - uv2 + F * (1 - u));
-          V_next[y][x] = v + dtSafe * (Dv * Lv[y][x] + uv2 - (F + k) * v);
-          U_next[y][x] = U.clamp(U_next[y][x], 0, 1);
-          V_next[y][x] = U.clamp(V_next[y][x], 0, 1);
-        }
-      U_grid = U_next;
-      V_grid = V_next;
-    }
-
-    function render() {
-      const lines = U_grid.map((row, y) =>
-        row.map((_, x) => valToChar(1 - U_grid[y][x])).join("")
-      ).join("\n");
-      emergentEl.textContent = lines;
-    }
-
-    let raf = 0, last = 0;
-    function tick(ts) {
-      if (!emergentEl.isConnected) return;
-      if (ts - last > 50) {
-        last = ts;
-        step();
-        render();
-      }
-      if (shouldRun()) raf = requestAnimationFrame(tick);
-    }
-    for (let i = 0; i < 200; i++) step();
-    render();
-    if (shouldRun()) raf = requestAnimationFrame(tick);
-    window.addEventListener("safe-mode-change", () => {
-      if (!shouldRun()) cancelAnimationFrame(raf);
-      else if (emergentEl.isConnected) raf = requestAnimationFrame(tick);
-    });
-  }
-
-  /* ——— Feedforward network: 4 → 8 → 4 with ReLU ———
-   * Inputs = sin(t + phase). Forward pass. Render nodes + edges by activation. */
+  /* ——— Feedforward network: 6 → 12 → 10 → 6 (deeper, denser) ———
+   * Inputs = sin(t + phase). Forward pass. Centered layout in grid. */
   const neuralEl = U.qs("#ascii-neural");
   if (neuralEl) {
-    const GW = 64;
-    const GH = 20;
+    const GW = 80;
+    const GH = 32;
     const seed = U.seeded(12345);
+    function rand() { return seed() * 2 - 1; }
 
-    function rand() {
-      return seed() * 2 - 1;
+    const layers = [6, 12, 10, 6];
+    const weights = [];
+    for (let L = 0; L < layers.length - 1; L++)
+      weights.push(Array(layers[L + 1]).fill(null).map(() =>
+        Array(layers[L]).fill(0).map(() => rand() * 0.6)
+      ));
+
+    const nLayers = layers.length;
+    const nodePos = [];
+    for (let L = 0; L < nLayers; L++) {
+      const n = layers[L];
+      const y = 0.15 + (L / (nLayers - 1)) * 0.7;
+      const xs = Array.from({ length: n }, (_, i) => 0.12 + (i / Math.max(n - 1, 1)) * 0.76);
+      nodePos.push(xs.map(x => ({ x, y })));
     }
-
-    const nIn = 4, nHid = 8, nOut = 4;
-    const W1 = Array(nHid).fill(null).map(() => Array(nIn).fill(0).map(() => rand() * 0.8));
-    const W2 = Array(nOut).fill(null).map(() => Array(nHid).fill(0).map(() => rand() * 0.8));
-
-    const xIn = [0, 0.25, 0.5, 0.75];
-    const yIn = 0.15;
-    const xHid = Array.from({ length: nHid }, (_, i) => 0.15 + (i / (nHid - 1)) * 0.7);
-    const yHid = 0.5;
-    const xOut = [0.2, 0.4, 0.6, 0.8];
-    const yOut = 0.85;
 
     function toGrid(x, y) {
       return {
@@ -187,25 +183,24 @@
     function relu(x) { return x > 0 ? x : 0; }
 
     function forward(t) {
-      const inp = Array(nIn).fill(0).map((_, i) => (Math.sin(t * 0.02 + i * 1.5) + 1) / 2);
-      const hid = Array(nHid).fill(0).map((_, j) =>
-        relu(W1[j].reduce((s, w, i) => s + w * inp[i], 0))
+      let act = Array(layers[0]).fill(0).map((_, i) =>
+        (Math.sin(t * 0.015 + i * 0.9) + 1) / 2
       );
-      const out = Array(nOut).fill(0).map((_, k) =>
-        relu(W2[k].reduce((s, w, j) => s + w * hid[j], 0))
-      );
-      const maxH = Math.max(...hid, 1e-6);
-      const maxO = Math.max(...out, 1e-6);
-      return {
-        inp: inp,
-        hid: hid.map(h => h / maxH),
-        out: out.map(o => o / maxO)
-      };
+      const all = [act.slice()];
+      for (let L = 0; L < weights.length; L++) {
+        act = weights[L].map(row =>
+          relu(row.reduce((s, w, i) => s + w * act[i], 0))
+        );
+        const max = Math.max(...act, 1e-6);
+        act = act.map(a => a / max);
+        all.push(act.slice());
+      }
+      return all;
     }
 
     function render(t) {
       const grid = Array(GH).fill(null).map(() => Array(GW).fill(0));
-      const a = forward(t);
+      const acts = forward(t);
 
       function drawLine(x0, y0, x1, y1, v) {
         const p0 = toGrid(x0, y0), p1 = toGrid(x1, y1);
@@ -215,33 +210,23 @@
           const gx = Math.round(p0.gx + (p1.gx - p0.gx) * u);
           const gy = Math.round(p0.gy + (p1.gy - p0.gy) * u);
           if (gx >= 0 && gx < GW && gy >= 0 && gy < GH)
-            grid[gy][gx] = Math.max(grid[gy][gx], v * 0.35);
+            grid[gy][gx] = Math.max(grid[gy][gx], v * 0.4);
         }
       }
 
-      for (let j = 0; j < nHid; j++)
-        for (let i = 0; i < nIn; i++)
-          drawLine(xIn[i], yIn, xHid[j], yHid, a.inp[i] * a.hid[j]);
-      for (let k = 0; k < nOut; k++)
-        for (let j = 0; j < nHid; j++)
-          drawLine(xHid[j], yHid, xOut[k], yOut, a.hid[j] * a.out[k]);
+      for (let L = 0; L < nLayers - 1; L++)
+        for (let i = 0; i < nodePos[L].length; i++)
+          for (let j = 0; j < nodePos[L + 1].length; j++) {
+            const a = nodePos[L][i], b = nodePos[L + 1][j];
+            drawLine(a.x, a.y, b.x, b.y, acts[L][i] * acts[L + 1][j]);
+          }
 
-      [a.inp, a.hid, a.out].flat().forEach((v, idx) => {});
-      a.inp.forEach((v, i) => {
-        const { gx, gy } = toGrid(xIn[i], yIn);
-        if (gy >= 0 && gy < GH && gx >= 0 && gx < GW)
-          grid[gy][gx] = Math.max(grid[gy][gx], 0.2 + v * 0.8);
-      });
-      a.hid.forEach((v, j) => {
-        const { gx, gy } = toGrid(xHid[j], yHid);
-        if (gy >= 0 && gy < GH && gx >= 0 && gx < GW)
-          grid[gy][gx] = Math.max(grid[gy][gx], 0.2 + v * 0.8);
-      });
-      a.out.forEach((v, k) => {
-        const { gx, gy } = toGrid(xOut[k], yOut);
-        if (gy >= 0 && gy < GH && gx >= 0 && gx < GW)
-          grid[gy][gx] = Math.max(grid[gy][gx], 0.2 + v * 0.8);
-      });
+      for (let L = 0; L < nLayers; L++)
+        nodePos[L].forEach((p, i) => {
+          const { gx, gy } = toGrid(p.x, p.y);
+          if (gy >= 0 && gy < GH && gx >= 0 && gx < GW)
+            grid[gy][gx] = Math.max(grid[gy][gx], 0.25 + acts[L][i] * 0.7);
+        });
 
       const lines = grid.map(row =>
         row.map(v => valToChar(v)).join("")

@@ -237,60 +237,53 @@ button.ctl { min-width: 2.5rem; }
 
 body[data-safe="on"] .signal-trace { animation: none; }
 
-/* ASCII art: asymmetric surface — emergent dominant, cellular + neural as readouts */
+/* ASCII art: symmetric, equal columns, generous gaps */
 .ascii-art-surface {
   display: grid;
-  grid-template-columns: 1fr 2.2fr 1fr;
-  grid-template-rows: auto;
-  gap: 0;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-xl);
   margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
   border-top: 1px solid var(--line);
-  padding-top: var(--space);
 }
 
 .ascii-art-panel {
   display: flex;
   flex-direction: column;
-  border-left: 1px solid var(--line);
-  padding-left: var(--space);
   min-height: 0;
 }
-
-.ascii-art-panel:first-child { border-left: none; padding-left: 0; }
 
 .ascii-art-label {
   font-size: 0.5rem;
   letter-spacing: 0.3em;
   color: var(--muted);
-  margin-bottom: 0.4rem;
-  opacity: 0.8;
+  margin-bottom: 0.5rem;
+  opacity: 0.85;
 }
 
 .ascii-art-field {
   margin: 0;
   white-space: pre;
   overflow: hidden;
-  font-size: 0.48rem;
+  font-size: 0.46rem;
   line-height: 1.04;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   border: none;
   background: transparent;
   color: color-mix(in srgb, var(--accent) 60%, var(--text-soft) 40%);
-  min-height: 140px;
+  min-height: 160px;
 }
 
-.ascii-art-cellular .ascii-art-field { font-size: 0.46rem; min-height: 160px; }
-.ascii-art-emergent .ascii-art-field { font-size: 0.5rem; min-height: 180px; }
-.ascii-art-neural .ascii-art-field { font-size: 0.46rem; min-height: 160px; }
+.ascii-art-cellular .ascii-art-field { font-size: 0.44rem; min-height: 150px; }
+.ascii-art-emergent .ascii-art-field { font-size: 0.48rem; min-height: 220px; }
+.ascii-art-neural .ascii-art-field { font-size: 0.44rem; min-height: 200px; }
 
 @media (max-width: 900px) {
   .ascii-art-surface {
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: var(--space-xl);
   }
-  .ascii-art-panel { border-left: 1px solid var(--line); padding-left: var(--space); }
-  .ascii-art-panel:first-child { border-left: 1px solid var(--line); padding-left: var(--space); }
-  .ascii-art-emergent .ascii-art-field { min-height: 200px; }
+  .ascii-art-emergent .ascii-art-field { min-height: 240px; }
 }
 
 /* Gallery section: placeholder for your images */
