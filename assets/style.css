@@ -85,9 +85,14 @@ main, .rail, .section, .footer { position: relative; z-index: 1; }
   border-radius: 1px;
 }
 
-body[data-safe="on"] .signal-trace,
+body[data-safe="on"] .signal-trace {
+  animation: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .signal-trace { animation: none; }
+  .signal-trace {
+    animation: none;
+  }
 }
 .hero h1 { margin: 0 0 0.4rem; font-size: clamp(2rem, 7vw, 5rem); text-transform: uppercase; letter-spacing: 0.08em; }
 .subtitle { margin: 0 0 1rem; color: var(--muted); text-transform: lowercase; }

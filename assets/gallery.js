@@ -56,9 +56,11 @@
   });
 
   const drift = { mx: 0, my: 0, sy: 0 };
+  let paintScheduled = false;
   const allTiles = () => U.qsa(".tile", gallery);
 
   function paint() {
+    paintScheduled = false;
     const safe = document.body.dataset.safe === "on" || U.prefersReducedMotion();
     if (safe) {
       allTiles().forEach((tile) => { tile.style.transform = "translate3d(0,0,0)"; });
@@ -72,15 +74,21 @@
     });
   }
 
-  window.addEventListener("mousemove", U.debounce((e) => {
+  function schedulePaint() {
+    if (paintScheduled) return;
+    paintScheduled = true;
+    requestAnimationFrame(paint);
+  }
+
+  window.addEventListener("mousemove", (e) => {
     drift.mx = e.clientX / Math.max(window.innerWidth, 1);
     drift.my = e.clientY / Math.max(window.innerHeight, 1);
-    paint();
-  }, 16));
-  window.addEventListener("scroll", U.debounce(() => {
+    schedulePaint();
+  });
+  window.addEventListener("scroll", () => {
     drift.sy = window.scrollY;
-    paint();
-  }, 16), { passive: true });
+    schedulePaint();
+  }, { passive: true });
   window.addEventListener("safe-mode-change", paint);
 
   setView(U.storageGet("archive-view", "gallery"));

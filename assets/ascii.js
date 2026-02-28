@@ -8,6 +8,8 @@
 
   const state = { raf: 0, frame: 0, seed: 9127, running: false };
 
+  render(9127, 0);
+
   function render(seed, frame = 0) {
     const cols = 108;
     const rows = 18;
@@ -71,4 +73,5 @@
   window.addEventListener("safe-mode-change", sync);
   window.addEventListener("lens-change", sync);
   sync();
+  setTimeout(sync, 0);
 })();
