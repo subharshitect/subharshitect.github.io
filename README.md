@@ -18,7 +18,9 @@ Static text-first archive surface for Subharshi Roy.
 - `assets/util.js` - shared utilities and safe helpers
 - `assets/app.js` - global mode, intensity, safe mode, tests
 - `assets/ascii.js` - deterministic hero signal renderer
+- `assets/ascii-art.js` - cellular automata, emergent life, neural ASCII
 - `assets/gallery.js` - archive gallery drift and log mode
+- `assets/avatar.jpg` - your avatar (add this file; hero hides it if missing)
 - `assets/music.js` - robust YouTube parsing, filters, thumbnails
 - `assets/noise.svg` - turbulence texture filter
 - `assets/favicon.svg` - textual favicon

@@ -116,6 +116,8 @@ main, .rail, .section, .footer { position: relative; z-index: 1; }
   display: inline-flex;
   gap: 1rem;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
 .ctl {
@@ -129,8 +131,11 @@ main, .rail, .section, .footer { position: relative; z-index: 1; }
   letter-spacing: 0.15em;
   text-transform: uppercase;
   cursor: pointer;
+  position: relative;
+  z-index: 2;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
+button.ctl { min-width: 2.5rem; }
 .ctl:hover { color: var(--text-soft); border-bottom-color: var(--line-soft); }
 
 .ctl-inline {
@@ -166,6 +171,33 @@ main, .rail, .section, .footer { position: relative; z-index: 1; }
   padding-top: var(--space-xl);
   padding-bottom: var(--space-xl);
 }
+
+.hero-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  align-items: flex-start;
+  margin-bottom: var(--space);
+}
+
+.hero-text { flex: 1; min-width: 0; }
+
+.hero-avatar-wrap {
+  flex-shrink: 0;
+  border-left: 1px solid var(--line);
+  padding-left: var(--space);
+}
+
+.hero-avatar {
+  display: block;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  filter: grayscale(0.4) contrast(1.05);
+  opacity: 0.9;
+}
+.hero-avatar[data-error="1"] { display: none; }
+.hero-avatar-wrap:has(.hero-avatar[data-error="1"]) { display: none; }
 
 .hero h1 {
   margin: 0 0 0.5rem;
@@ -204,6 +236,54 @@ main, .rail, .section, .footer { position: relative; z-index: 1; }
 }
 
 body[data-safe="on"] .signal-trace { animation: none; }
+
+/* ASCII art blocks: cellular, emergent, neural */
+.ascii-art-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space);
+  margin-top: var(--space-lg);
+}
+
+.ascii-art-block {
+  border-left: 1px solid var(--line);
+  padding-left: var(--space);
+}
+
+.ascii-art-label {
+  display: block;
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.ascii-art-field {
+  margin: 0;
+  white-space: pre;
+  overflow: hidden;
+  font-size: 0.5rem;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  border: none;
+  background: transparent;
+  color: color-mix(in srgb, var(--accent) 55%, var(--text-soft) 45%);
+  min-height: 120px;
+}
+
+/* Gallery section: placeholder for your images */
+.gallery-placeholder {
+  margin: 0 0 var(--space);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space);
+  margin-top: var(--space);
+}
 
 /* Headings: hierarchy engine */
 h2 {

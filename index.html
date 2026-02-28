@@ -19,6 +19,7 @@
     <a href="#writing">WRITING</a>
     <a href="#archive">ARCHIVE</a>
     <a href="#signal">SIGNAL</a>
+    <a href="#gallery">GALLERY</a>
     <a href="#cv">CV</a>
     <a href="#contact">CONTACT</a>
     <div class="rail-controls">
@@ -34,12 +35,33 @@
 
   <main id="top">
     <section class="hero section">
-      <h1>Subharshi Roy</h1>
-      <p class="subtitle">researcher | ml systems | psychonaut of silicon</p>
-      <p>genes write structure; minds write meaning; matter learns to model itself: consciousness</p>
-      <p>i build architectures for exhaustion, machines that feel the weight of their own precision</p>
+      <div class="hero-row">
+        <div class="hero-text">
+          <h1>Subharshi Roy</h1>
+          <p class="subtitle">researcher | ml systems | psychonaut of silicon</p>
+          <p>genes write structure; minds write meaning; matter learns to model itself: consciousness</p>
+          <p>i build architectures for exhaustion, machines that feel the weight of their own precision</p>
+        </div>
+        <div class="hero-avatar-wrap">
+          <img src="assets/avatar.jpg" alt="" class="hero-avatar" width="160" height="160" loading="lazy" onerror="this.dataset.error='1'">
+        </div>
+      </div>
       <pre id="ascii-hero" class="ascii-field" aria-live="polite" aria-label="Animated ASCII signal field"></pre>
       <div class="signal-trace" aria-hidden="true"></div>
+      <div class="ascii-art-grid">
+        <div class="ascii-art-block">
+          <span class="ascii-art-label">cellular</span>
+          <pre id="ascii-cellular" class="ascii-art-field" aria-live="polite"></pre>
+        </div>
+        <div class="ascii-art-block">
+          <span class="ascii-art-label">emergent</span>
+          <pre id="ascii-emergent" class="ascii-art-field" aria-live="polite"></pre>
+        </div>
+        <div class="ascii-art-block">
+          <span class="ascii-art-label">neural</span>
+          <pre id="ascii-neural" class="ascii-art-field" aria-live="polite"></pre>
+        </div>
+      </div>
     </section>
 
     <section id="work" class="section">
@@ -101,6 +123,12 @@
       <p>systems research, model internals, inference reliability, and trace forensics.</p>
     </section>
 
+    <section id="gallery" class="section">
+      <h2>GALLERY</h2>
+      <p class="gallery-placeholder">images will appear here.</p>
+      <div id="image-gallery" class="image-gallery" role="list" aria-label="Image gallery"></div>
+    </section>
+
     <section id="contact" class="section">
       <h2>CONTACT</h2>
       <p><a href="mailto:r.subharshi@gmail.com">r.subharshi@gmail.com</a></p>
@@ -117,8 +145,9 @@
   <footer class="section footer">© <span id="year"></span> Subharshi Roy; machine / memory / myth</footer>
 
   <script src="assets/util.js"></script>
-  <script src="assets/ascii.js"></script>
-  <script src="assets/gallery.js"></script>
   <script src="assets/app.js"></script>
+  <script src="assets/ascii.js"></script>
+  <script src="assets/ascii-art.js"></script>
+  <script src="assets/gallery.js"></script>
 </body>
 </html>
