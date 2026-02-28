@@ -87,6 +87,10 @@ body[data-safe="on"] .surface::before {
 
 main, .rail, .section, .footer { position: relative; z-index: 1; }
 
+body[data-signal-invert="on"] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
 /* ———————————————————————————————————————————————————————————
    RAIL: minimal. Instrument, not chrome.
    ——————————————————————————————————————————————————————————— */
@@ -147,10 +151,31 @@ button.ctl { min-width: 2.5rem; }
   letter-spacing: 0.12em;
 }
 .ctl-inline input[type="range"] {
-  width: 4rem;
-  height: 2px;
-  accent-color: var(--accent);
-  background: var(--line);
+  width: 5rem;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: linear-gradient(to right, var(--line) 0%, var(--accent) 100%);
+  border-radius: 2px;
+}
+
+.ctl-inline input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text-soft);
+  cursor: pointer;
+  border: 1px solid var(--line);
+}
+
+.ctl-inline input[type="range"]::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text-soft);
+  cursor: pointer;
+  border: 1px solid var(--line);
 }
 .ctl-inline input[type="checkbox"] { accent-color: var(--accent); }
 
@@ -237,20 +262,24 @@ button.ctl { min-width: 2.5rem; }
 
 body[data-safe="on"] .signal-trace { animation: none; }
 
-/* ASCII art: symmetric, equal columns, generous gaps */
+/* ASCII art: symmetric, equal columns, equal panel height */
 .ascii-art-surface {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
   gap: var(--space-xl);
   margin-top: var(--space-xl);
   padding-top: var(--space-xl);
   border-top: 1px solid var(--line);
+  align-items: start;
 }
 
 .ascii-art-panel {
   display: flex;
   flex-direction: column;
   min-height: 0;
+  width: 100%;
+  max-width: 100%;
 }
 
 .ascii-art-label {
@@ -261,29 +290,60 @@ body[data-safe="on"] .signal-trace { animation: none; }
   opacity: 0.85;
 }
 
+.ascii-art-controls {
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rule-chooser-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin: 0;
+}
+
+.rule-chooser, .rule-custom {
+  font: inherit;
+  font-size: 0.65rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  color: var(--text);
+  padding: 0.2rem 0.4rem;
+}
+
+.rule-chooser { min-width: 4.5rem; }
+.rule-custom { width: 3rem; }
+
 .ascii-art-field {
   margin: 0;
   white-space: pre;
   overflow: hidden;
-  font-size: 0.46rem;
+  font-size: 0.45rem;
   line-height: 1.04;
   letter-spacing: 0.02em;
   border: none;
   background: transparent;
   color: color-mix(in srgb, var(--accent) 60%, var(--text-soft) 40%);
-  min-height: 160px;
+  min-height: 200px;
+  width: 100%;
 }
 
-.ascii-art-cellular .ascii-art-field { font-size: 0.44rem; min-height: 150px; }
-.ascii-art-emergent .ascii-art-field { font-size: 0.48rem; min-height: 220px; }
-.ascii-art-neural .ascii-art-field { font-size: 0.44rem; min-height: 200px; }
+.ascii-art-cellular .ascii-art-field,
+.ascii-art-emergent .ascii-art-field,
+.ascii-art-neural .ascii-art-field {
+  min-height: 200px;
+  font-size: 0.45rem;
+}
 
 @media (max-width: 900px) {
   .ascii-art-surface {
     grid-template-columns: 1fr;
     gap: var(--space-xl);
   }
-  .ascii-art-emergent .ascii-art-field { min-height: 240px; }
+  .ascii-art-field { min-height: 220px; }
 }
 
 /* Gallery section: placeholder for your images */
@@ -318,11 +378,22 @@ li { margin-bottom: 0.35rem; }
 /* ———————————————————————————————————————————————————————————
    MECHANISM LENS: calibration instrument, not form.
    ——————————————————————————————————————————————————————————— */
+.lens-desc {
+  margin: 0 0 0.5rem;
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
 .lens-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space);
   margin-bottom: var(--space);
+}
+
+@media (max-width: 620px) {
+  .lens-grid { grid-template-columns: 1fr; }
 }
 
 .lens-grid label {

@@ -14,20 +14,29 @@
     return CHARS[Math.floor(U.clamp(v, 0, 0.999) * CHAR_LEN)];
   }
 
-  /* ——— Gray-Scott reaction-diffusion (Turing patterns) ———
-   * du/dt = Du·∇²u - u·v² + F·(1-u)
-   * dv/dt = Dv·∇²v + u·v² - (F+k)·v
-   * Double-buffered, small dt, classic spot/stripe parameters. */
+  function getLens() {
+    return {
+      rigor: Number(document.body.dataset.lensRigor || 64) / 100,
+      compression: Number(document.body.dataset.lensCompression || 72) / 100,
+      control: Number(document.body.dataset.lensControl || 39) / 100
+    };
+  }
+
+  function ruleTable(n) {
+    const t = [];
+    for (let i = 0; i < 8; i++) t.push((n >>> i) & 1);
+    return t;
+  }
+
+  /* ——— Gray-Scott (lens: compression → feed F, control → contrast) ——— */
   const emergentEl = U.qs("#ascii-emergent");
   if (emergentEl) {
     const W = 120;
     const H = 44;
     const Du = 0.2097;
     const Dv = 0.105;
-    const F = 0.037;
     const k = 0.06;
     const dt = 0.02;
-    const substeps = 25;
 
     let u0 = Array(H).fill(null).map(() => Array(W).fill(1));
     let v0 = Array(H).fill(null).map(() => Array(W).fill(0));
@@ -49,7 +58,7 @@
       return M[ym][x] + M[yp][x] + M[y][xm] + M[y][xp] - 4 * M[y][x];
     }
 
-    function step() {
+    function step(F, substeps) {
       for (let s = 0; s < substeps; s++) {
         for (let y = 0; y < H; y++)
           for (let x = 0; x < W; x++) {
@@ -67,27 +76,32 @@
       }
     }
 
-    function render() {
+    function render(contrast) {
       const lines = u0.map((row, y) =>
         row.map((_, x) => {
           const u = u0[y][x], v = v0[y][x];
-          const display = (1 - u) * 0.6 + v * 0.4;
+          let display = (1 - u) * 0.6 + v * 0.4;
+          display = display * (0.5 + contrast * 0.5);
           return valToChar(U.clamp(display, 0, 1));
         }).join("")
       ).join("\n");
       emergentEl.textContent = lines;
     }
 
-    for (let i = 0; i < 180; i++) step();
-    render();
+    for (let i = 0; i < 180; i++) step(0.037, 25);
+    render(0.5);
 
     let raf = 0, last = 0;
     function tick(ts) {
       if (!emergentEl.isConnected) return;
+      const lens = getLens();
+      const F = 0.02 + lens.compression * 0.04;
+      const substeps = 15 + Math.floor(lens.rigor * 25);
+      const contrast = 0.3 + lens.control * 0.7;
       if (ts - last > 45) {
         last = ts;
-        step();
-        render();
+        step(F, substeps);
+        render(contrast);
       }
       if (shouldRun()) raf = requestAnimationFrame(tick);
     }
@@ -96,11 +110,13 @@
       if (!shouldRun()) cancelAnimationFrame(raf);
       else if (emergentEl.isConnected) raf = requestAnimationFrame(tick);
     });
+    window.addEventListener("lens-change", () => {});
   }
 
-  /* ——— Simple 1D automaton: Rule 90 (Sierpiński) ———
-   * Clean fractal, reliable. Next = XOR(left, right). */
+  /* ——— 1D CA: user-selectable rule 0–255 (lens: rigor → speed) ——— */
   const cellularEl = U.qs("#ascii-cellular");
+  const ruleSelect = U.qs("#ca-rule");
+  const ruleCustom = U.qs("#ca-rule-custom");
   if (cellularEl) {
     const W = 61;
     const H = 24;
@@ -108,48 +124,73 @@
     row[Math.floor(W / 2)] = 1;
     const history = [row.slice()];
 
-    function rule90(l, r) { return l ^ r; }
+    function getRuleNum() {
+      const sel = ruleSelect ? ruleSelect.value : "90";
+      if (sel === "custom" && ruleCustom) return U.clamp(Number(ruleCustom.value) || 90, 0, 255);
+      return U.clamp(Number(sel) || 90, 0, 255);
+    }
 
     function step() {
+      const rtab = ruleTable(getRuleNum());
       const next = [];
       for (let x = 0; x < W; x++) {
         const l = row[(x - 1 + W) % W];
+        const c = row[x];
         const r = row[(x + 1) % W];
-        next.push(rule90(l, r));
+        const idx = (l << 2) | (c << 1) | r;
+        next.push(rtab[idx]);
       }
       row = next;
       history.push(row.slice());
       if (history.length > H) history.shift();
     }
 
-    function render() {
+    function render(bright) {
       const lines = history.map((r, i) => {
         const age = 1 - (history.length - 1 - i) / H;
-        return r.map(v => valToChar(v * (0.5 + 0.5 * age))).join("");
+        return r.map(v => valToChar(v * (0.3 + (0.4 + bright * 0.3) * age))).join("");
       }).join("\n");
       cellularEl.textContent = lines;
+    }
+
+    if (ruleSelect) {
+      ruleSelect.addEventListener("change", () => {
+        if (ruleSelect.value === "custom" && ruleCustom) {
+          ruleCustom.hidden = false;
+          ruleCustom.focus();
+        } else {
+          if (ruleCustom) ruleCustom.hidden = true;
+        }
+        render(getLens().control);
+      });
+    }
+    if (ruleCustom) {
+      ruleCustom.addEventListener("input", () => render(getLens().control));
+      ruleCustom.addEventListener("change", () => render(getLens().control));
     }
 
     let raf = 0, last = 0;
     function tick(ts) {
       if (!cellularEl.isConnected) return;
-      if (ts - last > 90) {
+      const lens = getLens();
+      const interval = 120 - Math.floor(lens.rigor * 80);
+      if (ts - last > interval) {
         last = ts;
         step();
-        render();
+        render(lens.control);
       }
       if (shouldRun()) raf = requestAnimationFrame(tick);
     }
-    render();
+    render(0.5);
     if (shouldRun()) raf = requestAnimationFrame(tick);
     window.addEventListener("safe-mode-change", () => {
       if (!shouldRun()) cancelAnimationFrame(raf);
       else if (cellularEl.isConnected) raf = requestAnimationFrame(tick);
     });
+    window.addEventListener("lens-change", () => {});
   }
 
-  /* ——— Feedforward network: 6 → 12 → 10 → 6 (deeper, denser) ———
-   * Inputs = sin(t + phase). Forward pass. Centered layout in grid. */
+  /* ——— Feedforward (lens: rigor → time scale, compression → edge, control → node) ——— */
   const neuralEl = U.qs("#ascii-neural");
   if (neuralEl) {
     const GW = 80;
@@ -198,7 +239,9 @@
       return all;
     }
 
-    function render(t) {
+    function render(t, lens) {
+      const edgeMul = 0.25 + (lens.compression || 0.5) * 0.5;
+      const nodeMul = 0.2 + (lens.control || 0.5) * 0.6;
       const grid = Array(GH).fill(null).map(() => Array(GW).fill(0));
       const acts = forward(t);
 
@@ -210,7 +253,7 @@
           const gx = Math.round(p0.gx + (p1.gx - p0.gx) * u);
           const gy = Math.round(p0.gy + (p1.gy - p0.gy) * u);
           if (gx >= 0 && gx < GW && gy >= 0 && gy < GH)
-            grid[gy][gx] = Math.max(grid[gy][gx], v * 0.4);
+            grid[gy][gx] = Math.max(grid[gy][gx], v * 0.4 * edgeMul);
         }
       }
 
@@ -225,7 +268,7 @@
         nodePos[L].forEach((p, i) => {
           const { gx, gy } = toGrid(p.x, p.y);
           if (gy >= 0 && gy < GH && gx >= 0 && gx < GW)
-            grid[gy][gx] = Math.max(grid[gy][gx], 0.25 + acts[L][i] * 0.7);
+            grid[gy][gx] = Math.max(grid[gy][gx], 0.2 + acts[L][i] * nodeMul);
         });
 
       const lines = grid.map(row =>
@@ -237,15 +280,18 @@
     let frame = 0, raf = 0;
     function tick() {
       if (!neuralEl.isConnected) return;
-      frame++;
-      render(frame);
+      const lens = getLens();
+      const timeScale = 0.5 + lens.rigor * 1.5;
+      frame += timeScale;
+      render(frame, lens);
       if (shouldRun()) raf = requestAnimationFrame(tick);
     }
-    render(0);
+    render(0, getLens());
     if (shouldRun()) raf = requestAnimationFrame(tick);
     window.addEventListener("safe-mode-change", () => {
       if (!shouldRun()) cancelAnimationFrame(raf);
       else if (neuralEl.isConnected) raf = requestAnimationFrame(tick);
     });
+    window.addEventListener("lens-change", () => {});
   }
 })();

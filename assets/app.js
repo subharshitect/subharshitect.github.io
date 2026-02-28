@@ -30,11 +30,14 @@
   }
 
   function applySignal(v) {
-    const n = U.clamp(Number(v) || 0, 0, 100) / 100;
+    const raw = U.clamp(Number(v) || 0, 0, 100);
+    const n = raw / 100;
     document.documentElement.style.setProperty("--grain-strength", (0.08 + n * 0.42).toFixed(3));
     document.documentElement.style.setProperty("--glow-strength", (0.1 + n * 0.8).toFixed(3));
     document.documentElement.style.setProperty("--scan-strength", (0.05 + n * 0.35).toFixed(3));
-    U.storageSet("signal", Math.round(n * 100));
+    document.documentElement.style.setProperty("--signal-invert", raw >= 98 ? "1" : "0");
+    document.body.dataset.signalInvert = raw >= 98 ? "on" : "off";
+    U.storageSet("signal", Math.round(raw));
   }
 
   function applySafe(on) {
@@ -52,7 +55,10 @@
     const sentence = `lens report: ${rigorWord} method, ${compWord} evidence, ${ctrlWord} operator state.`;
     lensOut.textContent = sentence;
     document.body.dataset.lensSeed = String(Math.floor(rv * 3 + cv * 5 + kv * 7));
-    window.dispatchEvent(new Event("lens-change"));
+    document.body.dataset.lensRigor = String(rv);
+    document.body.dataset.lensCompression = String(cv);
+    document.body.dataset.lensControl = String(kv);
+    window.dispatchEvent(new CustomEvent("lens-change", { detail: { rigor: rv, compression: cv, control: kv } }));
   }
 
   function runTests() {

@@ -50,7 +50,20 @@
       <div class="signal-trace" aria-hidden="true"></div>
       <div class="ascii-art-surface">
         <div class="ascii-art-panel ascii-art-cellular">
-          <span class="ascii-art-label" aria-hidden="true">rule 90</span>
+          <span class="ascii-art-label" aria-hidden="true">cellular</span>
+          <div class="ascii-art-controls">
+            <label class="rule-chooser-label" for="ca-rule">rule</label>
+            <select id="ca-rule" class="rule-chooser" aria-label="Cellular automata rule">
+              <option value="30">30</option>
+              <option value="90" selected>90</option>
+              <option value="110">110</option>
+              <option value="126">126</option>
+              <option value="150">150</option>
+              <option value="184">184</option>
+              <option value="custom">custom</option>
+            </select>
+            <input type="number" id="ca-rule-custom" class="rule-custom" min="0" max="255" value="90" aria-label="Custom rule number" hidden>
+          </div>
           <pre id="ascii-cellular" class="ascii-art-field" aria-live="polite"></pre>
         </div>
         <div class="ascii-art-panel ascii-art-emergent">
@@ -76,14 +89,15 @@
 
     <section id="signal" class="section">
       <h2>MECHANISM LENS</h2>
+      <p class="lens-desc">modulates cellular · gray–scott · feedforward</p>
       <div class="lens-grid">
-        <label>rigor &lt;-&gt; romance
+        <label>cellular
           <input id="lens-rigor" type="range" min="0" max="100" value="64">
         </label>
-        <label>compression &lt;-&gt; explosion
+        <label>gray–scott
           <input id="lens-compression" type="range" min="0" max="100" value="72">
         </label>
-        <label>control &lt;-&gt; surrender
+        <label>feedforward
           <input id="lens-control" type="range" min="0" max="100" value="39">
         </label>
       </div>
