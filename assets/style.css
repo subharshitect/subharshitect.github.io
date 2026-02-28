@@ -35,6 +35,20 @@ body { min-height: 100vh; line-height: 1.35; letter-spacing: 0.02em; }
   opacity: var(--grain-strength);
 }
 
+.surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 20%, rgba(86, 208, 255, calc(var(--glow-strength) * 0.12)), transparent 55%);
+  animation: breathe 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+body[data-safe="on"] .surface::before {
+  animation: none;
+  opacity: 0.9;
+}
+
 main, .rail, .section, .footer { position: relative; z-index: 1; }
 .rail {
   position: sticky;
@@ -59,6 +73,22 @@ main, .rail, .section, .footer { position: relative; z-index: 1; }
 }
 .ctl-inline { display: inline-flex; gap: 0.4rem; align-items: center; font-size: 0.75rem; }
 .section { width: min(1040px, 96vw); margin: 0 auto; padding: 1rem 0.75rem; border-bottom: 1px solid var(--line); }
+
+.signal-trace {
+  width: 100%;
+  height: 3px;
+  margin-top: 0.5rem;
+  background: repeating-linear-gradient(90deg, transparent 0, transparent 20px, var(--accent) 20px, var(--accent) 22px);
+  background-size: 120px 3px;
+  animation: signal-wave 4s linear infinite;
+  opacity: 0.5;
+  border-radius: 1px;
+}
+
+body[data-safe="on"] .signal-trace,
+@media (prefers-reduced-motion: reduce) {
+  .signal-trace { animation: none; }
+}
 .hero h1 { margin: 0 0 0.4rem; font-size: clamp(2rem, 7vw, 5rem); text-transform: uppercase; letter-spacing: 0.08em; }
 .subtitle { margin: 0 0 1rem; color: var(--muted); text-transform: lowercase; }
 h2 { font-size: 1rem; margin: 0 0 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; }

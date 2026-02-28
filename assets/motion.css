@@ -4,17 +4,61 @@
   100% { transform: translate3d(0, 0, 0); }
 }
 
-.tile {
+@keyframes breathe {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; }
+}
+
+@keyframes signal-wave {
+  0% { background-position: 0 0; }
+  100% { background-position: 120px 0; }
+}
+
+.tile-inner {
   animation: drift 9s linear infinite;
 }
 
-body[data-safe="on"] .tile,
+body[data-safe="on"] .tile-inner,
 body[data-safe="on"] .song-tile {
   animation: none;
 }
 
+@keyframes node-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.15); }
+}
+
+h2 {
+  position: relative;
+  padding-left: 1rem;
+}
+
+h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: node-pulse 3s ease-in-out infinite;
+}
+
+body[data-safe="on"] h2::before {
+  animation: none;
+  opacity: 0.6;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .tile,
+  h2::before {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile-inner,
   .song-tile {
     animation: none;
   }

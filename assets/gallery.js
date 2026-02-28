@@ -29,10 +29,12 @@
 
   gallery.innerHTML = tiles.map((t, i) => `
     <article class="tile" role="listitem" tabindex="0" data-i="${i}">
-      <div class="meta">${t[0]} - ${t[1]}</div>
-      <pre class="ascii-mini">${mini.join("\n")}</pre>
-      <div>${t[2]}</div>
-      <div class="deep">expanded layer: scheduler residue, cache temperatures, and witness timestamps remain visible in explosion mode.</div>
+      <div class="tile-inner">
+        <div class="meta">${t[0]} - ${t[1]}</div>
+        <pre class="ascii-mini">${mini.join("\n")}</pre>
+        <div>${t[2]}</div>
+        <div class="deep">expanded layer: scheduler residue, cache temperatures, and witness timestamps remain visible in explosion mode.</div>
+      </div>
     </article>
   `).join("");
 

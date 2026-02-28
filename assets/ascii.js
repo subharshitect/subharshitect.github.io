@@ -44,6 +44,7 @@
   function start() {
     if (state.running) return;
     state.running = true;
+    render(state.seed, state.frame);
     state.raf = requestAnimationFrame(tick);
   }
 
