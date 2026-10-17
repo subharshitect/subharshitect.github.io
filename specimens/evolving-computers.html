@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plate V: Evolving computers · Specimens · Subharshi Roy</title>
+  <meta name="description" content="Plate V: a genetic algorithm evolves cellular automata that compute, after Das, Mitchell and Crutchfield (1994).">
+  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/atom+xml" title="Subharshi Roy: notebook" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/motion.css">
+  <link rel="stylesheet" href="/assets/css/print.css">
+  <script src="/assets/js/prefs.js"></script>
+</head>
+<body>
+  <!-- build:site-header -->
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="identity" href="/">Subharshi Roy</a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="/#work">Work</a></li>
+          <li><a href="/notebook/">Notebook</a></li>
+          <li><a href="/specimens/" aria-current="page">Specimens</a></li>
+          <li><a href="/listening/">Listening</a></li>
+          <li><a href="/#about">About</a></li>
+        </ul>
+      </nav>
+      <div class="prefs">
+        <button type="button" class="toggle" data-pref-toggle="presentation" aria-pressed="false">Reading view</button>
+        <button type="button" class="toggle" data-pref-toggle="motion" aria-pressed="false">Pause motion</button>
+      </div>
+    </div>
+  </header>
+  <!-- /build:site-header -->
+
+  <main id="main" class="container">
+    <header class="plate-head">
+      <p class="eyebrow"><a href="/specimens/">Specimens</a> · Plate V · 1994</p>
+      <h1>Evolving computers</h1>
+      <p class="plate-question">Can computation appear without a designer?</p>
+    </header>
+
+    <section class="plate" id="evca" aria-label="Plate V">
+      <figure class="plate-figure textured">
+        <canvas data-plate-canvas role="img" aria-label="Space-time diagram"></canvas>
+        <figcaption><span class="plate-label">Plate V.</span> <span data-plate-caption></span></figcaption>
+        <ul class="legend">
+          <li style="--swatch: var(--specimen-particle)">particle: a boundary between regular regions</li>
+          <li style="--swatch: var(--specimen-domain-1)">inside a regular region (all 0s, all 1s, or checkerboard)</li>
+        </ul>
+      </figure>
+
+      <div class="instruments evca-side">
+        <section aria-labelledby="rule-title">
+          <h2 class="panel-title" id="rule-title"><label for="evca-which">Rule shown</label></h2>
+          <select id="evca-which" data-which>
+            <option value="par">φpar: evolved by the GA (published 1998)</option>
+            <option value="gkl">GKL: designed by hand (1978)</option>
+            <option value="majority">Local majority: the obvious rule</option>
+            <option value="run">The best of your run</option>
+          </select>
+          <div class="button-row" style="margin-top: var(--space-3)">
+            <button type="button" class="chip" data-view aria-pressed="true">Filtered view</button>
+            <button type="button" class="btn btn-quiet" data-new-ic>Another starting row</button>
+          </div>
+          <div class="param" style="margin-top: var(--space-4)">
+            <div class="param-head"><label for="evca-density">Share of 1s at the start</label><output data-density-out for="evca-density"></output></div>
+            <input type="range" id="evca-density" data-density min="0.3" max="0.7" step="0.01" value="0.5">
+            <p class="param-help">Near 0.5 is the hard case: the rule has to resolve a small majority it cannot see.</p>
+          </div>
+          <p class="stat-row">Share of random rows classified correctly: <b data-measured>–</b> <button type="button" class="btn btn-quiet" data-measure>Measure</button></p>
+        </section>
+
+        <section aria-labelledby="evolve-title">
+          <h2 class="panel-title" id="evolve-title">Evolve</h2>
+          <div class="observe-row">
+            <button type="button" class="btn btn-observe" data-evolve>Evolve</button>
+            <button type="button" class="btn btn-quiet" data-restart>New run</button>
+            <label class="visually-hidden" for="evca-seed">Seed</label>
+            <input type="number" id="evca-seed" data-seed min="0" max="999999" step="1" style="width: 7rem" aria-describedby="evca-seed-help">
+          </div>
+          <p class="hint" id="evca-seed-help">The paper’s settings: 100 rules, 100 test rows per generation, the best 20 kept, 100 generations. The seed makes a run repeatable.</p>
+          <p class="stat-row">Generation <b data-gen>–</b> · best fitness <b data-best>–</b></p>
+          <div data-chart></div>
+          <p class="hint">Fitness is scored the way the GA sees it: on rows whose share of 1s is drawn uniformly, so most are easy and fitness runs high. “Measure” uses the hard case, rows near one half, which is the performance the paper reports.</p>
+          <h3 class="panel-title" style="margin-top: var(--space-4)">Epochs of innovation</h3>
+          <ul class="epochs" data-epochs></ul>
+          <p class="plate-status" data-plate-status role="status"></p>
+        </section>
+
+        <section aria-labelledby="share-title">
+          <h2 class="panel-title" id="share-title">Record</h2>
+          <div class="button-row">
+            <button type="button" class="btn btn-quiet" data-save-png>Save as PNG</button>
+            <button type="button" class="btn btn-quiet" data-copy>Copy rule table</button>
+          </div>
+        </section>
+      </div>
+    </section>
+    <noscript><p class="empty">The plate needs JavaScript. The text below reads without it.</p></noscript>
+
+    <article class="note note-prose plate-text">
+      <h2>The original</h2>
+      <p>Can a row of cells, each seeing only its six nearest neighbours, decide something about the whole row? Rajarshi Das, Melanie Mitchell and James Crutchfield set a cellular automaton a task: if more than half of its 149 cells start as 1, settle to all 1s; otherwise settle to all 0s. No cell can count the whole row. The obvious rule, local majority, fails completely: it freezes into stripes.</p>
+      <p>Instead of designing a rule they evolved one. A genetic algorithm kept 100 candidate rules, tested them on 100 fresh random rows each generation, kept the best 20 and bred the rest from them by crossover and mutation, for 100 generations. Most runs found simple strategies: guess one answer every time (about 50% right), or grow large blocks of one colour (about 65%). But some runs discovered rules that compute with <em>particles</em>, boundaries between regular regions that travel, collide and annihilate, carrying information across the row. The best, called φpar, classifies 77.5% of unbiased random rows correctly.</p>
+      <p class="citation">Rajarshi Das, Melanie Mitchell and James P. Crutchfield, “A genetic algorithm discovers particle-based computation in cellular automata”, in <i>Parallel Problem Solving from Nature III</i>, Lecture Notes in Computer Science 866, 344–353 (Springer, 1994). <a href="https://csc.ucdavis.edu/~evca/Papers/ppsn94.pdf">PDF</a><br>James P. Crutchfield, Melanie Mitchell and Rajarshi Das, “The evolutionary design of collective computation in cellular automata” (1998). <a href="https://arxiv.org/abs/adap-org/9809001">arXiv:adap-org/9809001</a></p>
+
+      <h2>What the plate shows</h2>
+      <p>The plate is a space-time diagram: one row of 149 cells, time running downward. In the filtered view, cells inside a regular region (all 0s, all 1s, or a checkerboard) are drawn quietly, and only the boundaries between regions, the particles, are bright. That is the computation, made visible.</p>
+      <p>Evolve your own run with the paper’s settings and watch fitness climb, usually in sudden jumps, the “epochs of innovation” the authors describe; select an epoch to see what that rule does. Compare it with φpar, published in 1998, with the hand-designed GKL rule (Gács, Kurdyumov and Levin, 1978), and with local majority. “Measure” estimates the share of random rows each rule gets right; on this page φpar measures about 0.78 and GKL about 0.81.</p>
+
+      <h2>What it does not show</h2>
+      <div class="uncertain">
+      <p>No rule of this kind can solve the task perfectly; Land and Belew proved that in 1995. The genetic algorithm finds particle strategies only in some runs, so yours may stop at blocks. The φpar table here is the one printed in the 1998 paper and reproduces its reported performance; a second published rule could not be reproduced from the table as retrieved, and is left out.</p>
+      </div>
+
+      <section data-draft aria-labelledby="reflection-title">
+        <h2 id="reflection-title">Reflection</h2>
+        <div class="reflection">
+      <p>Nobody told evolution about particles. It was only rewarded for right answers, and in some runs it arrived at a design an engineer would recognise: signals that travel, meet, and decide. The rule does not know it is computing. Meaning, here, is something an observer reads into regularities that selection kept because they worked.</p>
+        </div>
+      </section>
+
+      <section class="related" aria-labelledby="reading-title">
+        <h2 id="reading-title">Further reading</h2>
+        <ul>
+        <li>Mark Land and Richard K. Belew, “No perfect two-state cellular automata for density classification exists”, <i>Physical Review Letters</i> 74, 5148–5150 (1995). <a href="https://doi.org/10.1103/PhysRevLett.74.5148">doi:10.1103/PhysRevLett.74.5148</a></li>
+        <li>Melanie Mitchell, James P. Crutchfield and Rajarshi Das, “Evolving cellular automata with genetic algorithms: a review of recent work” (1996). <a href="https://csc.ucdavis.edu/~evca/Papers/evca-review.html">online</a></li>
+        </ul>
+      </section>
+    </article>
+
+    <nav class="prev-next" aria-label="Other plates">
+      <a href="/specimens/kaleidoscope.html">← Plate IV: Kaleidoscopes of cooperation</a>
+      <a href="/specimens/">All specimens</a>
+      <a href="/specimens/sectors.html">Plate VI: Genetic sectors →</a>
+    </nav>
+  </main>
+
+  <!-- build:site-footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2026 Subharshi Roy · machine / memory / myth</p>
+      <ul>
+        <li data-draft><a href="/snapshots/">Monthly snapshots</a></li>
+        <li data-draft><a href="/feed.xml">Feed</a></li>
+        <li><a href="https://github.com/subharshitect" rel="me">GitHub</a></li>
+        <li><a href="mailto:r.subharshi@gmail.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+  <!-- /build:site-footer -->
+  <script type="module" src="/assets/js/evca-plate.js"></script>
+</body>
+</html>

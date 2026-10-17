@@ -1,0 +1,9 @@
+{
+  "draft": true,
+  "updated": "2026-10-17",
+  "items": [
+    { "label": "Working on", "text": "One line about the current project.", "href": "" },
+    { "label": "Reading", "text": "A paper or book, with a link if you like.", "href": "" },
+    { "label": "Listening to", "text": "An album or track.", "href": "" }
+  ]
+}

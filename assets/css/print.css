@@ -1,0 +1,43 @@
+/* Print: notes come out as plain, light documents with their margin notes
+   inline and link targets spelled out. */
+
+@media print {
+  :root {
+    --background: #fff;
+    --surface: #fff;
+    --surface-raised: #fff;
+    --text: #111;
+    --text-secondary: #333;
+    --text-tertiary: #555;
+    --accent: #0b5f86;
+    --border: #bbb;
+    --border-control: #888;
+    --texture: 0;
+    color-scheme: light;
+  }
+
+  html, body { background: #fff; color: #111; }
+  body { font-size: 11pt; }
+
+  .site-header, .site-footer, .skip-link, .prefs, .reading-progress,
+  .hero-visual, .instruments, .record, .trace-controls,
+  .inspect-bar, .question-foot button, .track-actions button, .track-player,
+  .draft-banner, [data-draft] { display: none !important; }
+
+  .container { width: auto; }
+  .section, .page-head { padding-top: 1.5rem; }
+
+  .note { display: block; }
+  .note > .margin-note {
+    margin: 0 0 1em;
+    padding: 0.5em 0.75em;
+    border-left: 2px solid #888;
+    background: none;
+    break-inside: avoid;
+  }
+
+  .note-prose a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.85em; color: #555; word-break: break-all; }
+  .figure, figure, table, pre { break-inside: avoid; }
+  .figure [data-view] { display: block !important; }
+  h2, h3 { break-after: avoid; }
+}

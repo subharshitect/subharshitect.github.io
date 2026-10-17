@@ -1,0 +1,46 @@
+/* Motion and the reading view.
+   One prominent visual moves at a time (the hero, or the active experiment),
+   driven by JS and paused through assets/js/prefs.js. CSS motion is limited
+   to small hover and focus transitions. */
+
+:root[data-motion="off"] *,
+:root[data-motion="off"] *::before,
+:root[data-motion="off"] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Reading view: no texture (via --texture in tokens.css), motion paused
+   (via prefs.js), prose set in the text face with more room. */
+
+:root[data-presentation="reading"] .section-body > p,
+:root[data-presentation="reading"] .entry-list p,
+:root[data-presentation="reading"] .page-head p,
+:root[data-presentation="reading"] .plate-text p {
+  font-family: var(--font-text);
+  font-size: var(--size-lead);
+  line-height: var(--leading-prose);
+  color: var(--text);
+}
+
+:root[data-presentation="reading"] .note-prose {
+  font-size: 1.1875rem;
+  line-height: 1.8;
+}
+
+:root[data-presentation="reading"] .hero-visual,
+:root[data-presentation="reading"] .plate-figure {
+  background: var(--background);
+}
+
+:root[data-presentation="reading"] .site-header {
+  position: static;
+}

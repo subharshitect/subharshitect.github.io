@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plate II: Gray–Scott · Specimens · Subharshi Roy</title>
+  <meta name="description" content="Plate II: Gray–Scott reaction–diffusion, after Turing (1952) and Pearson (1993).">
+  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/atom+xml" title="Subharshi Roy: notebook" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/motion.css">
+  <link rel="stylesheet" href="/assets/css/print.css">
+  <script src="/assets/js/prefs.js"></script>
+</head>
+<body>
+  <!-- build:site-header -->
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="identity" href="/">Subharshi Roy</a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="/#work">Work</a></li>
+          <li><a href="/notebook/">Notebook</a></li>
+          <li><a href="/specimens/" aria-current="page">Specimens</a></li>
+          <li><a href="/listening/">Listening</a></li>
+          <li><a href="/#about">About</a></li>
+        </ul>
+      </nav>
+      <div class="prefs">
+        <button type="button" class="toggle" data-pref-toggle="presentation" aria-pressed="false">Reading view</button>
+        <button type="button" class="toggle" data-pref-toggle="motion" aria-pressed="false">Pause motion</button>
+      </div>
+    </div>
+  </header>
+  <!-- /build:site-header -->
+
+  <main id="main" class="container">
+    <header class="plate-head">
+      <p class="eyebrow"><a href="/specimens/">Specimens</a> · Plate II · 1952 · 1993</p>
+      <h1>Gray–Scott</h1>
+      <p class="plate-question">How does something uniform become patterned?</p>
+    </header>
+
+    <section class="plate" id="plate" data-sim="gray-scott" data-plate="II" aria-label="Plate II">
+      <figure class="plate-figure textured">
+        <canvas data-plate-canvas role="img" aria-label="Gray–Scott"></canvas>
+        <figcaption><span class="plate-label">Plate II.</span> <span data-plate-caption></span><span class="plate-readout" data-plate-readout></span></figcaption>
+      </figure>
+
+      <div class="instruments">
+        <section aria-labelledby="observe-title">
+          <h2 class="panel-title" id="observe-title">Observe</h2>
+          <div class="observe-row">
+            <button type="button" class="btn btn-observe" data-observe aria-pressed="false">Observe</button>
+            <button type="button" class="btn btn-quiet" data-step>Step</button>
+            <button type="button" class="btn btn-quiet" data-reset>From the start</button>
+          </div>
+          <p class="plate-status" data-plate-status role="status"></p>
+        </section>
+        <section aria-labelledby="conditions-title">
+          <h2 class="panel-title" id="conditions-title">Conditions</h2>
+          <div data-conditions></div>
+          <p class="hint">Changing a condition starts again from the seed, so a link always reproduces the same plate.</p>
+        </section>
+        <section aria-labelledby="studies-title">
+          <h2 class="panel-title" id="studies-title">Studies</h2>
+          <div class="button-row" data-studies></div>
+          <p class="hint" data-study-note aria-live="polite"></p>
+        </section>
+      </div>
+    </section>
+    <noscript><p class="empty">The plate needs JavaScript to grow. The text below reads without it.</p></noscript>
+
+    <article class="note note-prose plate-text">
+      <h2>The original</h2>
+      <p>In 1952 Alan Turing asked how an embryo, which starts out nearly uniform, comes to have spots, stripes and limbs. His answer was chemical: substances he called morphogens, reacting with each other and diffusing through tissue, could make a uniform state unstable, so that small random disturbances grow into a stable pattern.</p>
+      <p>Forty years later John Pearson simulated a two-chemical reaction studied by Peter Gray and Stephen Scott, and found a surprising variety of irregular patterns in it, among them spots that grow until they reach a critical size and then divide in two.</p>
+      <p class="citation">A. M. Turing, “The chemical basis of morphogenesis”, <i>Philosophical Transactions of the Royal Society of London B</i> 237, 37–72 (1952). <a href="https://doi.org/10.1098/rstb.1952.0012">doi:10.1098/rstb.1952.0012</a><br>John E. Pearson, “Complex patterns in a simple system”, <i>Science</i> 261, 189–192 (1993). <a href="https://doi.org/10.1126/science.261.5118.189">doi:10.1126/science.261.5118.189</a></p>
+
+      <h2>What the plate shows</h2>
+      <p>Chemical U is fed in everywhere. Chemical V turns U into more V and is slowly removed. Only V is drawn. Two numbers decide everything: the feed rate <i>F</i> and the kill rate <i>k</i>. The <em>Mitosis</em> study reproduces Pearson’s dividing spots; <em>Coral</em>, <em>Maze</em> and <em>Worms</em> are other regions of the same two-number map.</p>
+      <p>Nudge <i>F</i> or <i>k</i> by a single step and see whether the pattern survives, freezes, or fades back to nothing.</p>
+
+      <h2>What it does not show</h2>
+      <div class="uncertain">
+      <p>This is two equations on a small grid whose edges wrap around. Pearson found that these patterns need a finite disturbance to start, so the plate begins from a few seeded patches rather than from noise. The plate draws square cells, so shapes keep their proportions. Real tissues involve many more molecules, growth and mechanics.</p>
+      </div>
+
+      <section data-draft aria-labelledby="reflection-title">
+        <h2 id="reflection-title">Reflection</h2>
+        <div class="reflection">
+      <p>A perfectly uniform world has nothing to say. Pattern begins as a failure of uniformity: an instability that a small accident is enough to trigger, and that the rules then amplify into something that looks deliberate. Turing’s claim was not that pattern is designed, but that it is what certain kinds of sameness cannot help becoming.</p>
+        </div>
+      </section>
+
+      <section class="related" aria-labelledby="reading-title">
+        <h2 id="reading-title">Further reading</h2>
+        <ul>
+        <li>Robert Munafo, <a href="https://mrob.com/pub/comp/xmorphia/">xmorphia</a>: a map of the Gray–Scott parameter space, following Pearson’s classification.</li>
+        </ul>
+      </section>
+    </article>
+
+    <details class="record">
+      <summary>Record this plate: link, image, seed, kept plates</summary>
+      <div class="record-body">
+        <section aria-labelledby="seed-title">
+          <h3 class="panel-title" id="seed-title"><label for="plate-seed">Seed</label></h3>
+          <div class="field-row">
+            <input type="number" id="plate-seed" data-seed min="0" max="999999" step="1" inputmode="numeric">
+            <button type="button" class="btn btn-quiet" data-reseed>New seed</button>
+          </div>
+          <p class="hint">The seed fixes every random choice, so the same seed and conditions always give the same plate.</p>
+        </section>
+        <section aria-labelledby="share-title">
+          <h3 class="panel-title" id="share-title">Share</h3>
+          <div class="button-row">
+            <button type="button" class="btn btn-quiet" data-copy>Copy link</button>
+            <button type="button" class="btn btn-quiet" data-save-txt>Save as text</button>
+            <button type="button" class="btn btn-quiet" data-save-png>Save as PNG</button>
+            <button type="button" class="btn btn-quiet" data-postcard>Postcard</button>
+          </div>
+          <p class="hint">A link reopens this exact plate by replaying from the seed. A postcard is the image with its title, conditions and link printed underneath.</p>
+        </section>
+        <section aria-labelledby="kept-title">
+          <h3 class="panel-title" id="kept-title">Kept in this browser</h3>
+          <form class="field-row" data-save-form>
+            <label class="visually-hidden" for="plate-save-name">Name</label>
+            <input type="text" id="plate-save-name" data-save-name maxlength="80" placeholder="Name (optional)">
+            <button type="submit" class="btn btn-quiet">Keep</button>
+          </form>
+          <p class="hint">Kept plates stay in this browser only and disappear if its site data is cleared. Export them to keep a copy.</p>
+          <p class="empty" data-saves-empty>Nothing kept yet.</p>
+          <ul class="saves" data-saves></ul>
+          <div class="button-row" style="margin-top: var(--space-3)">
+            <button type="button" class="btn btn-quiet" data-export>Export</button>
+            <label class="btn btn-quiet file-button">Import<input type="file" data-import accept="application/json,.json"></label>
+          </div>
+        </section>
+      </div>
+    </details>
+
+    <nav class="prev-next" aria-label="Other plates">
+      <a href="/specimens/feedforward.html">← Plate I: Feedforward</a>
+      <a href="/specimens/">All specimens</a>
+      <a href="/specimens/rule-30.html">Plate III: Rule 30 →</a>
+    </nav>
+  </main>
+
+  <!-- build:site-footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2026 Subharshi Roy · machine / memory / myth</p>
+      <ul>
+        <li data-draft><a href="/snapshots/">Monthly snapshots</a></li>
+        <li data-draft><a href="/feed.xml">Feed</a></li>
+        <li><a href="https://github.com/subharshitect" rel="me">GitHub</a></li>
+        <li><a href="mailto:r.subharshi@gmail.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+  <!-- /build:site-footer -->
+  <script type="module" src="/assets/js/specimen.js"></script>
+</body>
+</html>

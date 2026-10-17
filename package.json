@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "type": "module",
+  "description": "No dependencies. This file only tells node the site's .js files are ES modules, for the tests.",
+  "scripts": {
+    "test": "node --test tests/",
+    "build": "python3 tools/build.py",
+    "serve": "python3 -m http.server 8000"
+  }
+}

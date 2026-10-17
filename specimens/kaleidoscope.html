@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plate IV: Kaleidoscopes of cooperation · Specimens · Subharshi Roy</title>
+  <meta name="description" content="Plate IV: the spatial Prisoner's Dilemma of Nowak and May (1992), from a single defector.">
+  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/atom+xml" title="Subharshi Roy: notebook" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/motion.css">
+  <link rel="stylesheet" href="/assets/css/print.css">
+  <script src="/assets/js/prefs.js"></script>
+</head>
+<body>
+  <!-- build:site-header -->
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="identity" href="/">Subharshi Roy</a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="/#work">Work</a></li>
+          <li><a href="/notebook/">Notebook</a></li>
+          <li><a href="/specimens/" aria-current="page">Specimens</a></li>
+          <li><a href="/listening/">Listening</a></li>
+          <li><a href="/#about">About</a></li>
+        </ul>
+      </nav>
+      <div class="prefs">
+        <button type="button" class="toggle" data-pref-toggle="presentation" aria-pressed="false">Reading view</button>
+        <button type="button" class="toggle" data-pref-toggle="motion" aria-pressed="false">Pause motion</button>
+      </div>
+    </div>
+  </header>
+  <!-- /build:site-header -->
+
+  <main id="main" class="container">
+    <header class="plate-head">
+      <p class="eyebrow"><a href="/specimens/">Specimens</a> · Plate IV · 1992</p>
+      <h1>Kaleidoscopes of cooperation</h1>
+      <p class="plate-question">Can cooperation survive without anyone choosing to be good?</p>
+    </header>
+
+    <section class="plate" id="plate" data-sim="kaleidoscope" data-plate="IV" aria-label="Plate IV">
+      <figure class="plate-figure textured">
+        <canvas data-plate-canvas role="img" aria-label="Kaleidoscopes of cooperation"></canvas>
+        <figcaption><span class="plate-label">Plate IV.</span> <span data-plate-caption></span><span class="plate-readout" data-plate-readout></span></figcaption>
+     <ul class="legend">
+       <li style="--swatch: var(--specimen-c)">cooperator, still cooperating</li>
+       <li style="--swatch: var(--specimen-d)">defector, still defecting</li>
+       <li style="--swatch: var(--specimen-new-c)">just became a cooperator</li>
+       <li style="--swatch: var(--specimen-new-d)">just became a defector</li>
+     </ul>
+      </figure>
+
+      <div class="instruments">
+        <section aria-labelledby="observe-title">
+          <h2 class="panel-title" id="observe-title">Observe</h2>
+          <div class="observe-row">
+            <button type="button" class="btn btn-observe" data-observe aria-pressed="false">Observe</button>
+            <button type="button" class="btn btn-quiet" data-step>Step</button>
+            <button type="button" class="btn btn-quiet" data-reset>From the start</button>
+          </div>
+          <p class="plate-status" data-plate-status role="status"></p>
+        </section>
+        <section aria-labelledby="conditions-title">
+          <h2 class="panel-title" id="conditions-title">Conditions</h2>
+          <div data-conditions></div>
+          <p class="hint">Changing a condition starts again from the seed, so a link always reproduces the same plate.</p>
+        </section>
+        <section aria-labelledby="studies-title">
+          <h2 class="panel-title" id="studies-title">Studies</h2>
+          <div class="button-row" data-studies></div>
+          <p class="hint" data-study-note aria-live="polite"></p>
+        </section>
+      </div>
+    </section>
+    <noscript><p class="empty">The plate needs JavaScript to grow. The text below reads without it.</p></noscript>
+
+    <article class="note note-prose plate-text">
+      <h2>The original</h2>
+      <p>The Prisoner’s Dilemma rewards betrayal: whatever the other player does, you do better by defecting, yet two defectors end up worse off than two cooperators. Theory said cooperation should vanish. In 1992 Martin Nowak and Robert May placed players on a grid, gave them no memory and no strategy, nothing but “always cooperate” or “always defect”, and let them copy whichever neighbour had done best.</p>
+      <p>Cooperators and defectors persisted together indefinitely, in proportions that kept changing. Started from a symmetric arrangement, such as one defector in a sea of cooperators, the lattice unfolded into what they called dynamic fractals, which became known as evolutionary kaleidoscopes.</p>
+      <p class="citation">Martin A. Nowak and Robert M. May, “Evolutionary games and spatial chaos”, <i>Nature</i> 359, 826–829 (1992). <a href="https://doi.org/10.1038/359826a0">doi:10.1038/359826a0</a></p>
+
+      <h2>What the plate shows</h2>
+      <p>A 99 × 99 lattice whose edges wrap around. Each round, every site plays its eight neighbours and itself: a cooperator earns 1 from each cooperator it meets, a defector earns <i>b</i> from each cooperator, and everything else earns 0. Then every site, all at once, takes the strategy of the best scorer among itself and its neighbours.</p>
+      <p>At <i>b</i> = 1.85 a single defector grows into a symmetric pattern that never repeats. The symmetry is exact: nothing in the rule can break it. From a random start (the <em>Chaos from noise</em> study) the share of cooperators settles near 32%, the value reported in the literature; the readout under the plate measures it as you watch. Below <i>b</i> = 9/8 defectors stay isolated and the lattice freezes; above 2, defectors take nearly everything.</p>
+
+      <h2>What it does not show</h2>
+      <div class="uncertain">
+      <p>Everyone updates at the same instant, the lattice is perfect, and no one makes mistakes. Later work showed these details matter: letting players update one at a time instead of all at once can change the outcome. The model shows that spatial structure <em>can</em> sustain cooperation; it does not show that it does so in any particular population.</p>
+      </div>
+
+      <section data-draft aria-labelledby="reflection-title">
+        <h2 id="reflection-title">Reflection</h2>
+        <div class="reflection">
+      <p>No one in this lattice is good. Nobody remembers a kindness or punishes a betrayal; each site only copies whoever nearby did best. Cooperation survives anyway, in clusters, because cooperators next to cooperators do well, and doing well is the only thing anyone imitates. Goodness here is not a virtue but a geometry: a matter of who your neighbours are.</p>
+        </div>
+      </section>
+
+      <section class="related" aria-labelledby="reading-title">
+        <h2 id="reading-title">Further reading</h2>
+        <ul>
+        <li>Bernardo A. Huberman and Natalie S. Glance, “Evolutionary games and computer simulations”, <i>PNAS</i> 90, 7716–7718 (1993): the same game with asynchronous updates. <a href="https://doi.org/10.1073/pnas.90.16.7716">doi:10.1073/pnas.90.16.7716</a></li>
+        <li>György Szabó and Gábor Fáth, “Evolutionary games on graphs”, <i>Physics Reports</i> 446, 97–216 (2007), section 6.5. <a href="https://arxiv.org/abs/cond-mat/0607344">arXiv:cond-mat/0607344</a></li>
+        </ul>
+      </section>
+    </article>
+
+    <details class="record">
+      <summary>Record this plate: link, image, seed, kept plates</summary>
+      <div class="record-body">
+        <section aria-labelledby="seed-title">
+          <h3 class="panel-title" id="seed-title"><label for="plate-seed">Seed</label></h3>
+          <div class="field-row">
+            <input type="number" id="plate-seed" data-seed min="0" max="999999" step="1" inputmode="numeric">
+            <button type="button" class="btn btn-quiet" data-reseed>New seed</button>
+          </div>
+          <p class="hint">The seed fixes every random choice, so the same seed and conditions always give the same plate.</p>
+        </section>
+        <section aria-labelledby="share-title">
+          <h3 class="panel-title" id="share-title">Share</h3>
+          <div class="button-row">
+            <button type="button" class="btn btn-quiet" data-copy>Copy link</button>
+            <button type="button" class="btn btn-quiet" data-save-txt>Save as text</button>
+            <button type="button" class="btn btn-quiet" data-save-png>Save as PNG</button>
+            <button type="button" class="btn btn-quiet" data-postcard>Postcard</button>
+          </div>
+          <p class="hint">A link reopens this exact plate by replaying from the seed. A postcard is the image with its title, conditions and link printed underneath.</p>
+        </section>
+        <section aria-labelledby="kept-title">
+          <h3 class="panel-title" id="kept-title">Kept in this browser</h3>
+          <form class="field-row" data-save-form>
+            <label class="visually-hidden" for="plate-save-name">Name</label>
+            <input type="text" id="plate-save-name" data-save-name maxlength="80" placeholder="Name (optional)">
+            <button type="submit" class="btn btn-quiet">Keep</button>
+          </form>
+          <p class="hint">Kept plates stay in this browser only and disappear if its site data is cleared. Export them to keep a copy.</p>
+          <p class="empty" data-saves-empty>Nothing kept yet.</p>
+          <ul class="saves" data-saves></ul>
+          <div class="button-row" style="margin-top: var(--space-3)">
+            <button type="button" class="btn btn-quiet" data-export>Export</button>
+            <label class="btn btn-quiet file-button">Import<input type="file" data-import accept="application/json,.json"></label>
+          </div>
+        </section>
+      </div>
+    </details>
+
+    <nav class="prev-next" aria-label="Other plates">
+      <a href="/specimens/rule-30.html">← Plate III: Rule 30</a>
+      <a href="/specimens/">All specimens</a>
+      <a href="/specimens/evolving-computers.html">Plate V: Evolving computers →</a>
+    </nav>
+  </main>
+
+  <!-- build:site-footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2026 Subharshi Roy · machine / memory / myth</p>
+      <ul>
+        <li data-draft><a href="/snapshots/">Monthly snapshots</a></li>
+        <li data-draft><a href="/feed.xml">Feed</a></li>
+        <li><a href="https://github.com/subharshitect" rel="me">GitHub</a></li>
+        <li><a href="mailto:r.subharshi@gmail.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+  <!-- /build:site-footer -->
+  <script type="module" src="/assets/js/specimen.js"></script>
+</body>
+</html>

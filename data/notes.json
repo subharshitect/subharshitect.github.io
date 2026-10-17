@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "how-these-notes-work",
+    "title": "How these notes work",
+    "date": "2026-10-17",
+    "status": "observation",
+    "tags": ["meta"],
+    "summary": "A template entry: the structure every note follows, with a margin note, a figure with its data, and a section for what is still uncertain.",
+    "draft": true
+  },
+  {
+    "slug": "failed-attempt-template",
+    "title": "Failed attempt: template",
+    "date": "2026-10-17",
+    "status": "failed attempt",
+    "tags": ["meta"],
+    "summary": "The format for writing up something that did not work: what I expected, what I tried, what happened, what I think explains it, and what I would try next.",
+    "draft": true
+  }
+]

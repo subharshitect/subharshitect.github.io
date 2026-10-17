@@ -1,0 +1,76 @@
+/* Tokens: one dark field, one accent, tonal variation.
+   Change the atmosphere here, not in component rules.
+   Contrast on --background: text 14.6:1, secondary 9.3:1, tertiary 6.8:1,
+   accent 9.0:1. Borders are decorative; --border-control (3.4:1) outlines
+   things you can operate. */
+
+:root {
+  color-scheme: dark;
+
+  /* colour roles */
+  --background: #030507;
+  --surface: #0a0f15;
+  --surface-raised: #0f161e;
+  --text: #d3dbe5;
+  --text-secondary: #a5b0bf;
+  --text-tertiary: #8a96a6;
+  --accent: #4eb8e0;
+  --accent-wash: rgba(78, 184, 224, 0.08);
+  --border: #25303d;
+  --border-control: #5b6b80;
+
+  /* type */
+  --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace;
+  --font-text: Charter, "Bitstream Charter", "Sitka Text", Cambria, "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --size-label: 0.75rem;
+  --size-small: 0.875rem;
+  --size-body: 1rem;
+  --size-lead: 1.125rem;
+  --size-title: clamp(1.5rem, 3.5vw, 2rem);
+  --size-display: clamp(2rem, 7vw, 3.5rem);
+  --leading: 1.6;
+  --leading-prose: 1.7;
+  --tracking-label: 0.12em;
+
+  /* space and frame */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --page-max: 72rem;
+  --page-gutter: clamp(1rem, 4vw, 3rem);
+  --section-gap: clamp(3rem, 7vw, 6rem);
+  --label-col: 10rem;
+  --column-gap: 2rem;
+  --measure: 66ch;
+
+  /* motion */
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --ease: cubic-bezier(0.2, 0.1, 0.1, 1);
+
+  /* specimen inks: extra hues appear only inside plates, where colour carries meaning */
+  --specimen-c: #2f86b0;            /* cooperator that stayed a cooperator */
+  --specimen-d: #e0565b;            /* defector that stayed a defector */
+  --specimen-new-c: #74d68f;        /* site that just became a cooperator */
+  --specimen-new-d: #f0c94a;        /* site that just became a defector */
+  --specimen-cfp: #4eb8e0;          /* the two strains, after the paper's CFP / YFP */
+  --specimen-yfp: #f0c94a;
+  --specimen-ring-cfp: #2a6c86;     /* growth rings: the same strains, darker */
+  --specimen-ring-yfp: #8f7a2c;
+  --specimen-domain-0: #0a1117;     /* filtered space-time domains, kept quiet */
+  --specimen-domain-1: #1a2833;
+  --specimen-domain-checker: #122230;
+  --specimen-particle: #f2f5f8;     /* the particles: what the evolved rule computes with */
+  --specimen-raw-one: #4eb8e0;
+
+  /* texture: set to 0 by reading view */
+  --texture: 1;
+}
+
+:root[data-presentation="reading"] {
+  --texture: 0;
+}

@@ -1,0 +1,7 @@
+{
+  "hardware": "NVIDIA H200 NVL (one GPU)",
+  "software": "PyTorch 2.10.0+cu128, transformers 4.57.6, Python 3.11",
+  "workload": "facebook/opt-125m in fp16, batch size 1: a 104-token prompt (prefill), then 8 greedy decode steps reusing the KV cache",
+  "settings": "Recorded after one identical warm-up run, with torch.profiler collecting CPU ops, GPU kernels and GPU memory. Profiling adds overhead to every CPU-side op, so CPU times here are longer than in an unprofiled run.",
+  "source": "Recorded with tools/profile_example.py and reduced with tools/trace_extract.py; the CPU lane shows only top-level PyTorch ops, not the ops nested inside them."
+}

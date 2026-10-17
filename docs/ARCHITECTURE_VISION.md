@@ -1,5 +1,24 @@
 # Vision: surface, not portfolio
 
+> **Revision, October 2026.** The direction is now *a personal research space
+> with an experimental visual layer*. Visitors should be able to understand the
+> work, read something interesting, and play with the site without decoding
+> every sentence. What changed from the text below:
+>
+> - Writing has three registers: direct for navigation and controls,
+>   conversational and specific for introductions and projects, and as
+>   personal or strange as wanted for essays, captions and asides.
+> - Texture and motion are concentrated in the hero and the experiments.
+>   Reading surfaces stay quiet, one prominent visual moves at a time, and a
+>   reading view turns the atmosphere off.
+> - Grids are regular: one page frame, one gutter, section labels on a shared
+>   axis. Asymmetry stays inside bounded regions (the experiments, figures).
+> - Data is real or absent. Fabricated-looking "trace" artifacts are gone;
+>   drafts are hidden behind `?drafts=1` until they are true.
+>
+> The rest still holds: one dark field, one accent, monospace structure,
+> tokens in one place, content separate from interaction logic.
+
 **Core priority: aesthetic coherence and visual authorship.**
 
 The system must serve the visual language. Not the other way around.

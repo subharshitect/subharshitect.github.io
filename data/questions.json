@@ -1,0 +1,42 @@
+[
+  {
+    "id": "memory-reasoning",
+    "draft": true,
+    "text": "When does reducing memory use make a system harder to reason about?",
+    "related": []
+  },
+  {
+    "id": "compression-loss",
+    "draft": true,
+    "text": "When a model is compressed, which losses never show up in the benchmarks we use to check it?",
+    "related": []
+  },
+  {
+    "id": "trace-trust",
+    "draft": true,
+    "text": "How much of a profile can I trust once the profiler itself is part of the run?",
+    "related": [
+      {
+        "label": "Plate VII: the trace",
+        "href": "/specimens/trace.html"
+      }
+    ]
+  },
+  {
+    "id": "cache-eviction",
+    "draft": true,
+    "text": "What is the right unit to evict from a KV cache: a token, a block, or a request?",
+    "related": []
+  },
+  {
+    "id": "small-models-launch-bound",
+    "draft": true,
+    "text": "Below what model size does inference stop being about the GPU at all?",
+    "related": [
+      {
+        "label": "Plate VII: the trace",
+        "href": "/specimens/trace.html"
+      }
+    ]
+  }
+]

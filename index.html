@@ -3,165 +3,234 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Subharshi Roy - Archive Surface</title>
-  <meta name="description" content="A dark systems dossier of machine, memory, and myth.">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/style.css">
-  <link rel="stylesheet" href="assets/ascii.css">
-  <link rel="stylesheet" href="assets/motion.css">
+  <title>Subharshi Roy</title>
+  <meta name="description" content="Subharshi Roy is a PhD student at IIT Delhi working on ML systems: memory during inference, KV caches, and tracing where time goes. Notes, a cabinet of specimens reconstructed from classic papers, and music.">
+  <meta property="og:title" content="Subharshi Roy">
+  <meta property="og:description" content="PhD student at IIT Delhi working on ML systems. Notes, a cabinet of specimens from classic papers, and music.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://subharshitect.github.io/">
+  <link rel="canonical" href="https://subharshitect.github.io/">
+  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/atom+xml" title="Subharshi Roy: notebook" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/motion.css">
+  <link rel="stylesheet" href="/assets/css/print.css">
+  <script src="/assets/js/prefs.js"></script>
 </head>
-<body data-mode="exp" data-safe="off" data-archive-view="gallery">
-  <div class="surface" aria-hidden="true"></div>
-
-  <header class="rail">
-    <a href="#top">INDEX</a>
-    <a href="#work">WORK</a>
-    <a href="#writing">WRITING</a>
-    <a href="#archive">ARCHIVE</a>
-    <a href="#signal">SIGNAL</a>
-    <a href="#gallery">GALLERY</a>
-    <a href="#cv">CV</a>
-    <a href="#contact">CONTACT</a>
-    <div class="rail-controls">
-      <button id="mode-toggle" type="button" class="ctl" aria-label="Toggle mode">MODE</button>
-      <label class="ctl ctl-inline" for="signal-intensity"><span class="rail-label">SIG</span>
-        <input id="signal-intensity" type="range" min="0" max="100" value="56" aria-label="Signal intensity">
-      </label>
-      <label class="ctl ctl-inline" for="safe-mode"><span class="rail-label">SAFE</span>
-        <input id="safe-mode" type="checkbox" aria-label="Safe mode">
-      </label>
+<body>
+  <!-- build:site-header -->
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="identity" href="/">Subharshi Roy</a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="/#work">Work</a></li>
+          <li><a href="/notebook/">Notebook</a></li>
+          <li><a href="/specimens/">Specimens</a></li>
+          <li><a href="/listening/">Listening</a></li>
+          <li><a href="/#about">About</a></li>
+        </ul>
+      </nav>
+      <div class="prefs">
+        <button type="button" class="toggle" data-pref-toggle="presentation" aria-pressed="false">Reading view</button>
+        <button type="button" class="toggle" data-pref-toggle="motion" aria-pressed="false">Pause motion</button>
+      </div>
     </div>
   </header>
+  <!-- /build:site-header -->
 
-  <main id="top">
-    <section class="hero section">
-      <div class="hero-row">
-        <div class="hero-text">
-          <h1>Subharshi Roy</h1>
-          <p class="subtitle">researcher | ml systems | psychonaut of silicon</p>
-          <p>genes write structure; minds write meaning; matter learns to model itself: consciousness</p>
-          <p>i build architectures for exhaustion, machines that feel the weight of their own precision</p>
-        </div>
-        <div class="hero-avatar-wrap">
-          <img src="assets/avatar.jpg" alt="" class="hero-avatar" width="160" height="160" loading="lazy" onerror="this.dataset.error='1'">
-        </div>
-      </div>
-      <pre id="ascii-hero" class="ascii-field" aria-live="polite" aria-label="Animated ASCII signal field"></pre>
-      <div class="signal-trace" aria-hidden="true"></div>
-      <div class="ascii-art-surface">
-        <div class="ascii-art-panel ascii-art-cellular">
-          <span class="ascii-art-label" aria-hidden="true">cellular</span>
-          <div class="ascii-art-controls">
-            <label class="rule-chooser-label" for="ca-rule">rule</label>
-            <select id="ca-rule" class="rule-chooser" aria-label="Cellular automata rule">
-              <option value="30">30</option>
-              <option value="90" selected>90</option>
-              <option value="110">110</option>
-              <option value="126">126</option>
-              <option value="150">150</option>
-              <option value="184">184</option>
-              <option value="custom">custom</option>
-            </select>
-            <input type="number" id="ca-rule-custom" class="rule-custom" min="0" max="255" value="90" aria-label="Custom rule number" hidden>
+  <main id="main">
+    <section class="intro container" aria-labelledby="name">
+      <div class="intro-grid">
+        <div class="intro-text">
+          <div class="intro-id">
+            <img class="avatar" src="/assets/images/avatar-240.jpg" srcset="/assets/images/avatar-240.jpg 240w, /assets/images/avatar-480.jpg 480w" sizes="88px" width="240" height="240" alt="Portrait of Subharshi Roy">
+            <div>
+              <h1 id="name">Subharshi Roy</h1>
+              <p class="tagline">researcher | ml systems | psychonaut of silicon</p>
+            </div>
           </div>
-          <pre id="ascii-cellular" class="ascii-art-field" aria-live="polite"></pre>
+          <p class="lead">I’m a PhD student at IIT Delhi. I study how machine-learning systems use memory and time, mostly during inference. This site collects my notes, a cabinet of specimens from papers I keep returning to, and music I keep coming back to.</p>
         </div>
-        <div class="ascii-art-panel ascii-art-emergent">
-          <span class="ascii-art-label" aria-hidden="true">gray–scott</span>
-          <pre id="ascii-emergent" class="ascii-art-field" aria-live="polite"></pre>
-        </div>
-        <div class="ascii-art-panel ascii-art-neural">
-          <span class="ascii-art-label" aria-hidden="true">feedforward</span>
-          <pre id="ascii-neural" class="ascii-art-field" aria-live="polite"></pre>
-        </div>
+        <!-- build:currently -->
+        <aside class="currently" aria-labelledby="currently-title" data-draft>
+          <h2 id="currently-title">Currently</h2>
+          <dl>
+            <dt>Working on</dt>
+            <dd>One line about the current project.</dd>
+            <dt>Reading</dt>
+            <dd>A paper or book, with a link if you like.</dd>
+            <dt>Listening to</dt>
+            <dd>An album or track.</dd>
+          </dl>
+          <p class="updated">Updated <time datetime="2026-10-17">17 October 2026</time></p>
+        </aside>
+        <!-- /build:currently -->
       </div>
     </section>
 
-    <section id="work" class="section">
-      <h2>WORK</h2>
-      <p>PhD at IIT Delhi. I inhabit the thin membrane between algorithm and flesh; tracing how memory collapses when optimized. My research lives in the dark geometry of deltas, KV caches, and the slow thermodynamics of computation.</p>
-      <ul>
-        <li>focus; parameter decay, paging, trace-driven inference</li>
-        <li>tools; PyTorch · CUDA · Triton · eBPF · perf</li>
-        <li>credo; measure, reduce, remain</li>
-      </ul>
-    </section>
+    <figure class="hero-visual textured container" aria-labelledby="hero-caption">
+      <canvas id="hero-frame" class="hero-canvas" data-sim="cellular" data-rule="30" data-density="0" data-speed="10" data-seed="1" role="img" aria-label="Rule 30, an elementary cellular automaton, growing from a single cell. Each row is computed from the row above it."></canvas>
+      <figcaption id="hero-caption">
+        <span>Rule 30, one cell, each row computed from the row above.</span>
+        <a href="/specimens/rule-30.html">Plate III: Rule 30 →</a>
+      </figcaption>
+    </figure>
 
-    <section id="signal" class="section">
-      <h2>MECHANISM LENS</h2>
-      <p class="lens-desc">modulates cellular · gray–scott · feedforward</p>
-      <div class="lens-grid">
-        <label>cellular
-          <input id="lens-rigor" type="range" min="0" max="100" value="64">
-        </label>
-        <label>gray–scott
-          <input id="lens-compression" type="range" min="0" max="100" value="72">
-        </label>
-        <label>feedforward
-          <input id="lens-control" type="range" min="0" max="100" value="39">
-        </label>
-      </div>
-      <p id="lens-output" class="lens-output">calibrating mechanism lens...</p>
-    </section>
-
-    <section id="writing" class="section">
-      <h2>WRITING</h2>
-      <p><a href="https://medium.com/@r.subharshi" target="_blank" rel="noopener noreferrer">medium.com/@r.subharshi</a></p>
-      <ol class="fragments">
-        <li>I profile the silence between CUDA kernels before I trust the throughput report.</li>
-        <li>The trace says memory is stable, then one allocator spike writes panic into the night.</li>
-        <li>I name each bottleneck like evidence, then ask which one is lying by omission.</li>
-        <li>Compression feels ethical until the lost token is a human intention.</li>
-        <li>Every cache hit is temporary mercy, every miss a confession of architecture.</li>
-        <li>I log thermal drift beside model drift because silicon also keeps a body ledger.</li>
-        <li>When latency drops, I listen harder for what meaning was shaved to get there.</li>
-      </ol>
-    </section>
-
-    <section id="archive" class="section">
-      <h2>ARCHIVE</h2>
-      <div class="archive-controls">
-        <button id="archive-view-toggle" type="button" class="ctl" aria-label="Toggle view">LOG</button>
-      </div>
-      <div id="archive-gallery" class="archive-gallery" role="list"></div>
-      <div id="archive-log" class="archive-log" hidden></div>
-      <div class="archive-readme">
-        <p>the machine hums quietly beneath the words.</p>
-        <p>this page; bare metal and breath-hosts my work, my decay, my deltas.</p>
-        <p>© subharshi - 2025</p>
+    <section id="work" class="section container section-layout" aria-labelledby="work-title">
+      <h2 class="section-label" id="work-title"><span class="marker">01</span>Work</h2>
+      <div class="section-body">
+        <p>I work on the systems side of machine learning. My interests include memory management during inference, KV caches and paging, compressing model parameters, and finding out where a system actually spends its time by tracing it end to end.</p>
+        <ul class="facts">
+          <li><span>Focus</span><span>KV-cache management and paging · parameter deltas and compression · trace-driven performance analysis</span></li>
+          <li><span>Tools</span><span>PyTorch · CUDA · Triton · eBPF · perf</span></li>
+          <li><span>Method</span><span>measure, reduce, remain</span></li>
+          <li data-draft><span>Projects</span><span>Two or three projects, each with a one-line result and a link.</span></li>
+        </ul>
       </div>
     </section>
 
-    <section id="cv" class="section">
-      <h2>CV</h2>
-      <p>systems research, model internals, inference reliability, and trace forensics.</p>
+    <div class="section container section-layout" data-question-row hidden>
+      <div aria-hidden="true"></div>
+      <div class="section-body">
+        <!-- build:questions -->
+        <section class="question" data-questions aria-labelledby="question-title" hidden>
+          <h2 id="question-title">A question I’m thinking about</h2>
+          <ul>
+            <li data-qid="memory-reasoning" data-draft>
+              <blockquote>When does reducing memory use make a system harder to reason about?</blockquote>
+            </li>
+            <li data-qid="compression-loss" data-draft hidden>
+              <blockquote>When a model is compressed, which losses never show up in the benchmarks we use to check it?</blockquote>
+            </li>
+            <li data-qid="trace-trust" data-draft hidden>
+              <blockquote>How much of a profile can I trust once the profiler itself is part of the run?</blockquote>
+              <p class="question-foot"><a href="/specimens/trace.html">Plate VII: the trace →</a></p>
+            </li>
+            <li data-qid="cache-eviction" data-draft hidden>
+              <blockquote>What is the right unit to evict from a KV cache: a token, a block, or a request?</blockquote>
+            </li>
+            <li data-qid="small-models-launch-bound" data-draft hidden>
+              <blockquote>Below what model size does inference stop being about the GPU at all?</blockquote>
+              <p class="question-foot"><a href="/specimens/trace.html">Plate VII: the trace →</a></p>
+            </li>
+          </ul>
+          <p class="question-foot"><button type="button" class="btn btn-quiet" data-question-next hidden>Another question</button></p>
+        </section>
+        <!-- /build:questions -->
+      </div>
+    </div>
+
+    <section id="notebook" class="section container section-layout" aria-labelledby="notebook-title">
+      <h2 class="section-label" id="notebook-title"><span class="marker">02</span>Notebook</h2>
+      <div class="section-body">
+        <p>Notes from experiments, things I’m trying to understand, and problems I haven’t solved yet.</p>
+        <!-- build:notes-latest -->
+        <ul class="entry-list">
+          <li class="entry" data-note data-tags="meta" data-title="How these notes work" data-summary="A template entry: the structure every note follows, with a margin note, a figure with its data, and a section for what is still uncertain." data-draft>
+            <div class="entry-meta"><time datetime="2026-10-17">17 October 2026</time><span class="status" data-status="observation">observation</span><span>meta</span><span>draft</span></div>
+            <h3><a href="/notebook/how-these-notes-work.html">How these notes work</a></h3>
+            <p>A template entry: the structure every note follows, with a margin note, a figure with its data, and a section for what is still uncertain.</p>
+          </li>
+          <li class="entry" data-note data-tags="meta" data-title="Failed attempt: template" data-summary="The format for writing up something that did not work: what I expected, what I tried, what happened, what I think explains it, and what I would try next." data-draft>
+            <div class="entry-meta"><time datetime="2026-10-17">17 October 2026</time><span class="status" data-status="failed attempt">failed attempt</span><span>meta</span><span>draft</span></div>
+            <h3><a href="/notebook/failed-attempt-template.html">Failed attempt: template</a></h3>
+            <p>The format for writing up something that did not work: what I expected, what I tried, what happened, what I think explains it, and what I would try next.</p>
+          </li>
+          <li class="empty">No entries published yet.</li>
+        </ul>
+        <!-- /build:notes-latest -->
+        <p class="more"><a href="/notebook/">All notes →</a> · Longer essays are on <a href="https://vajrakaivalya.medium.com/">Medium</a>.</p>
+      </div>
     </section>
 
-    <section id="gallery" class="section">
-      <h2>GALLERY</h2>
-      <p class="gallery-placeholder">images will appear here.</p>
-      <div id="image-gallery" class="image-gallery" role="list" aria-label="Image gallery"></div>
+    <section id="specimens" class="section container section-layout" aria-labelledby="specimens-title">
+      <h2 class="section-label" id="specimens-title"><span class="marker">03</span>Specimens</h2>
+      <div class="section-body">
+        <p>Small systems from papers that changed how we think about pattern, computation and life, each reconstructed, running, and read for what it means.</p>
+        <ol class="entry-list plate-list">
+          <li><div class="entry-meta"><span>Plate I · 1943</span></div><h3><a href="/specimens/feedforward.html">Feedforward</a></h3><p class="plate-question">What can a unit that only adds and compares come to know?</p></li>
+          <li><div class="entry-meta"><span>Plate II · 1952 · 1993</span></div><h3><a href="/specimens/gray-scott.html">Gray–Scott</a></h3><p class="plate-question">How does something uniform become patterned?</p></li>
+          <li><div class="entry-meta"><span>Plate III · 1983</span></div><h3><a href="/specimens/rule-30.html">Rule 30</a></h3><p class="plate-question">Can a rule be simple and its future still unknowable?</p></li>
+          <li><div class="entry-meta"><span>Plate IV · 1992</span></div><h3><a href="/specimens/kaleidoscope.html">Kaleidoscopes of cooperation</a></h3><p class="plate-question">Can cooperation survive without anyone choosing to be good?</p></li>
+          <li><div class="entry-meta"><span>Plate V · 1994</span></div><h3><a href="/specimens/evolving-computers.html">Evolving computers</a></h3><p class="plate-question">Can computation appear without a designer?</p></li>
+          <li><div class="entry-meta"><span>Plate VI · 2007</span></div><h3><a href="/specimens/sectors.html">Genetic sectors</a></h3><p class="plate-question">How much of what survives is merit, and how much is position?</p></li>
+          <li data-draft><div class="entry-meta"><span>Plate VII · 2026</span><span>draft</span></div><h3><a href="/specimens/trace.html">A machine examining itself</a></h3><p class="plate-question">What does a machine look like when it examines itself?</p></li>
+        </ol>
+        <p class="more"><a href="/specimens/">The cabinet →</a></p>
+      </div>
     </section>
 
-    <section id="contact" class="section">
-      <h2>CONTACT</h2>
-      <p><a href="mailto:r.subharshi@gmail.com">r.subharshi@gmail.com</a></p>
-      <p><a href="https://github.com/subharshitect" target="_blank" rel="noopener noreferrer">github.com/subharshitect</a></p>
-      <p><a href="music.html">music signal index</a></p>
+    <section id="listening" class="section container section-layout" aria-labelledby="listening-title">
+      <h2 class="section-label" id="listening-title"><span class="marker">04</span>Listening</h2>
+      <div class="section-body">
+        <p>Songs I keep coming back to, with a few notes about why.</p>
+        <!-- build:listening-latest -->
+        <ul class="entry-list">
+          <li class="track">
+            <img class="track-thumb" src="/assets/images/listening/M1dtkfI_iuI.jpg" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <div>
+              <h3 class="track-title">the ghost song</h3>
+              <p class="track-actions"><a href="https://www.youtube.com/watch?v=M1dtkfI_iuI" rel="noopener noreferrer">Listen on YouTube ↗</a><button type="button" class="btn btn-quiet" data-embed-id="M1dtkfI_iuI" data-title="the ghost song" aria-expanded="false" hidden>Play here</button><span class="entry-meta">added 21 February 2026</span></p>
+            </div>
+            <div class="track-player" hidden></div>
+          </li>
+          <li class="track">
+            <img class="track-thumb" src="/assets/images/listening/XgCnUYeyeiA.jpg" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <div>
+              <h3 class="track-title">when the smoke is going down</h3>
+              <p class="track-actions"><a href="https://www.youtube.com/watch?v=XgCnUYeyeiA" rel="noopener noreferrer">Listen on YouTube ↗</a><button type="button" class="btn btn-quiet" data-embed-id="XgCnUYeyeiA" data-title="when the smoke is going down" aria-expanded="false" hidden>Play here</button><span class="entry-meta">added 21 February 2026</span></p>
+            </div>
+            <div class="track-player" hidden></div>
+          </li>
+          <li class="track">
+            <img class="track-thumb" src="/assets/images/listening/mJx5GlTEcmQ.jpg" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <div>
+              <h3 class="track-title">draconid - creatureism</h3>
+              <p class="track-actions"><a href="https://www.youtube.com/watch?v=mJx5GlTEcmQ" rel="noopener noreferrer">Listen on YouTube ↗</a><button type="button" class="btn btn-quiet" data-embed-id="mJx5GlTEcmQ" data-title="draconid - creatureism" aria-expanded="false" hidden>Play here</button><span class="entry-meta">added 21 February 2026</span></p>
+            </div>
+            <div class="track-player" hidden></div>
+          </li>
+        </ul>
+        <!-- /build:listening-latest -->
+        <p class="more"><a href="/listening/">The whole shelf →</a></p>
+      </div>
     </section>
 
-    <section id="__test" class="section" hidden>
-      <h2>__TEST</h2>
-      <pre id="test-output">pending tests...</pre>
+    <section id="about" class="section container section-layout" aria-labelledby="about-title">
+      <h2 class="section-label" id="about-title"><span class="marker">05</span>About</h2>
+      <div class="section-body">
+        <p>I’m Subharshi Roy, a PhD student at IIT Delhi working on ML systems. The best way to reach me is email.</p>
+        <ul class="facts">
+          <li><span>Email</span><span><a href="mailto:r.subharshi@gmail.com">r.subharshi@gmail.com</a></span></li>
+          <li><span>GitHub</span><span><a href="https://github.com/subharshitect" rel="me">github.com/subharshitect</a></span></li>
+          <li><span>Writing</span><span><a href="https://vajrakaivalya.medium.com/" rel="me">vajrakaivalya.medium.com</a></span></li>
+          <li data-draft><span>CV</span><span><a href="/cv.pdf">cv.pdf</a> (add the file, then remove data-draft)</span></li>
+        </ul>
+        <p class="aside-line">genes write structure; minds write meaning; matter learns to model itself: consciousness</p>
+      </div>
     </section>
   </main>
 
-  <footer class="section footer">© <span id="year"></span> Subharshi Roy; machine / memory / myth</footer>
+  <!-- build:site-footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2026 Subharshi Roy · machine / memory / myth</p>
+      <ul>
+        <li data-draft><a href="/snapshots/">Monthly snapshots</a></li>
+        <li data-draft><a href="/feed.xml">Feed</a></li>
+        <li><a href="https://github.com/subharshitect" rel="me">GitHub</a></li>
+        <li><a href="mailto:r.subharshi@gmail.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+  <!-- /build:site-footer -->
 
-  <script src="assets/util.js"></script>
-  <script src="assets/app.js"></script>
-  <script src="assets/ascii.js"></script>
-  <script src="assets/ascii-art.js"></script>
-  <script src="assets/gallery.js"></script>
+  <script type="module" src="/assets/js/hero.js"></script>
+  <script type="module" src="/assets/js/questions.js"></script>
+  <script type="module" src="/assets/js/listening.js"></script>
 </body>
 </html>

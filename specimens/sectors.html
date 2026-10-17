@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plate VI: Genetic sectors · Specimens · Subharshi Roy</title>
+  <meta name="description" content="Plate VI: genetic sectors in an expanding colony, after Hallatschek, Hersen, Ramanathan and Nelson (2007).">
+  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/atom+xml" title="Subharshi Roy: notebook" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/motion.css">
+  <link rel="stylesheet" href="/assets/css/print.css">
+  <script src="/assets/js/prefs.js"></script>
+</head>
+<body>
+  <!-- build:site-header -->
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="identity" href="/">Subharshi Roy</a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="/#work">Work</a></li>
+          <li><a href="/notebook/">Notebook</a></li>
+          <li><a href="/specimens/" aria-current="page">Specimens</a></li>
+          <li><a href="/listening/">Listening</a></li>
+          <li><a href="/#about">About</a></li>
+        </ul>
+      </nav>
+      <div class="prefs">
+        <button type="button" class="toggle" data-pref-toggle="presentation" aria-pressed="false">Reading view</button>
+        <button type="button" class="toggle" data-pref-toggle="motion" aria-pressed="false">Pause motion</button>
+      </div>
+    </div>
+  </header>
+  <!-- /build:site-header -->
+
+  <main id="main" class="container">
+    <header class="plate-head">
+      <p class="eyebrow"><a href="/specimens/">Specimens</a> · Plate VI · 2007</p>
+      <h1>Genetic sectors</h1>
+      <p class="plate-question">How much of what survives is merit, and how much is position?</p>
+    </header>
+
+    <section class="plate" id="plate" data-sim="sectors" data-plate="VI" aria-label="Plate VI">
+      <figure class="plate-figure textured">
+        <canvas data-plate-canvas role="img" aria-label="Genetic sectors"></canvas>
+        <figcaption><span class="plate-label">Plate VI.</span> <span data-plate-caption></span><span class="plate-readout" data-plate-readout></span></figcaption>
+     <ul class="legend">
+       <li style="--swatch: var(--specimen-cfp)">first strain</li>
+       <li style="--swatch: var(--specimen-yfp)">second strain</li>
+       <li style="--swatch: var(--specimen-ring-cfp)">growth rings: the edge of the colony at intervals</li>
+     </ul>
+      </figure>
+
+      <div class="instruments">
+        <section aria-labelledby="observe-title">
+          <h2 class="panel-title" id="observe-title">Observe</h2>
+          <div class="observe-row">
+            <button type="button" class="btn btn-observe" data-observe aria-pressed="false">Observe</button>
+            <button type="button" class="btn btn-quiet" data-step>Step</button>
+            <button type="button" class="btn btn-quiet" data-reset>From the start</button>
+          </div>
+          <p class="plate-status" data-plate-status role="status"></p>
+        </section>
+        <section aria-labelledby="conditions-title">
+          <h2 class="panel-title" id="conditions-title">Conditions</h2>
+          <div data-conditions></div>
+          <p class="hint">Changing a condition starts again from the seed, so a link always reproduces the same plate.</p>
+        </section>
+        <section aria-labelledby="studies-title">
+          <h2 class="panel-title" id="studies-title">Studies</h2>
+          <div class="button-row" data-studies></div>
+          <p class="hint" data-study-note aria-live="polite"></p>
+        </section>
+      </div>
+    </section>
+    <noscript><p class="empty">The plate needs JavaScript to grow. The text below reads without it.</p></noscript>
+
+    <article class="note note-prose plate-text">
+      <h2>The original</h2>
+      <p>Oskar Hallatschek and colleagues mixed two strains of <i>E. coli</i> that were genetically identical except for the colour of a fluorescent protein, one cyan (CFP), one yellow (YFP). They placed a droplet of about a million cells on an agar plate and watched the colony grow for four days.</p>
+      <p>The well-mixed homeland at the centre stayed speckled. But from its edge outward the colony split into single-coloured flares, which coarsened into a few large sectors reaching the rim. Growth measurements showed neither strain had a significant advantage. The sectors were drift, not selection: only a thin band of pioneers at the edge, about 70 µm deep, passes its genes on, so chance acts on a small population even inside a very large one.</p>
+      <p>The boundaries between sectors wander faster than a simple random walk (they measured an exponent of 0.65 ± 0.05, close to the 2/3 of the Eden growth model), and in circular colonies the growing circumference eventually pulls them apart, so the number of surviving sectors reflects the size of the homeland rather than the number of founders.</p>
+      <p class="citation">Oskar Hallatschek, Pascal Hersen, Sharad Ramanathan and David R. Nelson, “Genetic drift at expanding frontiers promotes gene segregation”, <i>PNAS</i> 104, 19926–19930 (2007). <a href="https://doi.org/10.1073/pnas.0710150104">doi:10.1073/pnas.0710150104</a></p>
+
+      <h2>What the plate shows</h2>
+      <p>An Eden model, the simple growth model the paper compares its colonies with. A circular homeland is filled with the two strains at random. Then, one cell at a time, a random empty site on the colony’s edge is filled by a copy of a random neighbour. Nothing favours either strain. The faint rings mark the edge at regular intervals, like the time-lapse lines in the paper’s figures.</p>
+      <p>Watch the speckle at the homeland’s edge sort itself into flares, and the flares lose to one another until a few sectors own the rim. The readout counts the sector boundaries crossing the edge. Try the <em>95 : 5</em> study: most of the rare strain is squeezed out early, but some of it surfs the front to the rim. A smaller homeland leaves fewer sectors.</p>
+
+      <h2>What it does not show</h2>
+      <div class="uncertain">
+      <p>Real colonies have nutrients, cell shapes, thickness and mechanical pushing; this is cells on a square lattice, which grows slightly faster along the grid’s axes. There is no selection and no mutation here, and the plate is far smaller than a real colony, so expect only a handful of sectors.</p>
+      </div>
+
+      <section data-draft aria-labelledby="reflection-title">
+        <h2 id="reflection-title">Reflection</h2>
+        <div class="reflection">
+      <p>In this dish nothing is better than anything else, and still one colour ends up owning most of the rim. Being at the edge at the right moment is the only advantage, and it compounds. When we look at who prevailed and read the story backwards, as merit, we may be reading position as virtue. History is written by those who happened to be at the front.</p>
+        </div>
+      </section>
+
+      <section class="related" aria-labelledby="reading-title">
+        <h2 id="reading-title">Further reading</h2>
+        <ul>
+        <li>Oskar Hallatschek and David R. Nelson, “Life at the front of an expanding population”, <i>Evolution</i> 64, 193–206 (2010).</li>
+        <li>K. S. Korolev, Mikkel Avlund, Oskar Hallatschek and David R. Nelson, “Genetic demixing and evolution in linear stepping stone models”, <i>Reviews of Modern Physics</i> 82, 1691–1718 (2010).</li>
+        </ul>
+      </section>
+    </article>
+
+    <details class="record">
+      <summary>Record this plate: link, image, seed, kept plates</summary>
+      <div class="record-body">
+        <section aria-labelledby="seed-title">
+          <h3 class="panel-title" id="seed-title"><label for="plate-seed">Seed</label></h3>
+          <div class="field-row">
+            <input type="number" id="plate-seed" data-seed min="0" max="999999" step="1" inputmode="numeric">
+            <button type="button" class="btn btn-quiet" data-reseed>New seed</button>
+          </div>
+          <p class="hint">The seed fixes every random choice, so the same seed and conditions always give the same plate.</p>
+        </section>
+        <section aria-labelledby="share-title">
+          <h3 class="panel-title" id="share-title">Share</h3>
+          <div class="button-row">
+            <button type="button" class="btn btn-quiet" data-copy>Copy link</button>
+            <button type="button" class="btn btn-quiet" data-save-txt>Save as text</button>
+            <button type="button" class="btn btn-quiet" data-save-png>Save as PNG</button>
+            <button type="button" class="btn btn-quiet" data-postcard>Postcard</button>
+          </div>
+          <p class="hint">A link reopens this exact plate by replaying from the seed. A postcard is the image with its title, conditions and link printed underneath.</p>
+        </section>
+        <section aria-labelledby="kept-title">
+          <h3 class="panel-title" id="kept-title">Kept in this browser</h3>
+          <form class="field-row" data-save-form>
+            <label class="visually-hidden" for="plate-save-name">Name</label>
+            <input type="text" id="plate-save-name" data-save-name maxlength="80" placeholder="Name (optional)">
+            <button type="submit" class="btn btn-quiet">Keep</button>
+          </form>
+          <p class="hint">Kept plates stay in this browser only and disappear if its site data is cleared. Export them to keep a copy.</p>
+          <p class="empty" data-saves-empty>Nothing kept yet.</p>
+          <ul class="saves" data-saves></ul>
+          <div class="button-row" style="margin-top: var(--space-3)">
+            <button type="button" class="btn btn-quiet" data-export>Export</button>
+            <label class="btn btn-quiet file-button">Import<input type="file" data-import accept="application/json,.json"></label>
+          </div>
+        </section>
+      </div>
+    </details>
+
+    <nav class="prev-next" aria-label="Other plates">
+      <a href="/specimens/evolving-computers.html">← Plate V: Evolving computers</a>
+      <a href="/specimens/">All specimens</a>
+      <a href="/specimens/trace.html" data-draft>Plate VII: A machine examining itself →</a>
+    </nav>
+  </main>
+
+  <!-- build:site-footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2026 Subharshi Roy · machine / memory / myth</p>
+      <ul>
+        <li data-draft><a href="/snapshots/">Monthly snapshots</a></li>
+        <li data-draft><a href="/feed.xml">Feed</a></li>
+        <li><a href="https://github.com/subharshitect" rel="me">GitHub</a></li>
+        <li><a href="mailto:r.subharshi@gmail.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+  <!-- /build:site-footer -->
+  <script type="module" src="/assets/js/specimen.js"></script>
+</body>
+</html>

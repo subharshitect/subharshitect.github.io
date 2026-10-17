@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Subharshi Roy: notebook</title>
+  <link href="https://subharshitect.github.io/"/>
+  <link rel="self" href="https://subharshitect.github.io/feed.xml"/>
+  <id>https://subharshitect.github.io/</id>
+  <updated>2026-01-01T00:00:00Z</updated>
+  <author><name>Subharshi Roy</name></author>
+</feed>

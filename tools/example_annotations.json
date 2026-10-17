@@ -1,0 +1,32 @@
+[
+  {
+    "match": {"lane": "Steps", "name": "prefill"},
+    "title": "Start here: one prefill, eight decode steps",
+    "text": "The prompt goes through the model once (prefill), then each decode step produces one more token. Prefill and every decode step launch the same 207 GPU kernels; prefill takes about 9.5 ms and each decode step about 6.9 ms."
+  },
+  {
+    "match": {"lane": "Steps", "name": "decode 1"},
+    "title": "The GPU is mostly waiting",
+    "text": "The kernels inside this 6.9 ms step add up to about 0.67 ms, so the GPU is busy for roughly a tenth of the step. The other lanes show where the time goes instead: the CPU is busy for most of the step."
+  },
+  {
+    "match": {"lane": "CPU: PyTorch ops", "name": "aten::linear", "occurrence": 150},
+    "title": "Hundreds of small ops on the CPU",
+    "text": "Each decode step dispatches 342 top-level PyTorch ops (73 of them are linear layers), which occupy about 4.9 ms of the step. The short gaps between ops are Python running the model code. With a model this small, the per-op cost on the CPU is larger than the work each op sends to the GPU."
+  },
+  {
+    "match": {"lane": "GPU kernels", "name": "nvjet_hsh_512x8", "occurrence": 3},
+    "title": "The longest kernel in each decode step",
+    "text": "About 24 µs, once per decode step, right at the end. Its position and size are consistent with the output projection from the 768-dimensional hidden state to the 50,272-token vocabulary, the largest matrix in the model. I have not confirmed this against the op that launched it."
+  },
+  {
+    "match": {"lane": "GPU kernels", "name": "CatArrayBatchedCopy", "occurrence": 100},
+    "title": "The KV cache grows by copying",
+    "text": "There are 24 of these concatenation kernels in every step: one for the keys and one for the values in each of the 12 layers. The cache grows by concatenating the new token onto the old tensor, which copies what is already there. At this sequence length each copy takes about 2 µs."
+  },
+  {
+    "match": {"lane": "Steps", "name": "decode 8"},
+    "title": "Memory: one token of KV cache per step",
+    "text": "In the memory lane, allocated memory at the end of each decode step is about 0.035 MiB higher than the step before. That matches one token of KV cache: 12 layers × (key + value) × 768 values × 2 bytes = 36,864 bytes. The drop of about 10 MiB early in decode 1 is consistent with the prefill's logits for all 104 prompt positions being freed (104 × 50,272 × 2 bytes ≈ 10 MiB)."
+  }
+]
