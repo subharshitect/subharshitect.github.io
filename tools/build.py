@@ -28,7 +28,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://subharshitect.github.io"
 AUTHOR = "Subharshi Roy"
-NOTE_STATUSES = {"observation", "experiment", "open question", "failed attempt"}
+NOTE_STATUSES = {"observation", "experiment", "open question", "failed attempt", "memory"}
 MONTHS = ["January", "February", "March", "April", "May", "June", "July",
           "August", "September", "October", "November", "December"]
 

@@ -1,0 +1,98 @@
+/* Memoir notes: a quieter, more cinematic page for personal writing.
+   Borrowed from a reference site: a pixel display title, a narrow metadata
+   column on the left, monospace prose, one periwinkle accent, a dimmed
+   atmosphere behind the text. Scoped to body.memoir; the rest of the site is
+   untouched. Reading view turns the atmosphere off. */
+
+@font-face {
+  font-family: "Terminal Grotesque";
+  src: url("/assets/fonts/terminal-grotesque.woff2") format("woff2");
+  font-display: swap;
+}
+
+body.memoir {
+  --memoir-accent: #8aa6ff;
+  --memoir-text: #e4e2ee;
+  --memoir-dim: #a9a7bd;
+  --font-pixel: "Terminal Grotesque", var(--font-mono);
+  background:
+    radial-gradient(60rem 40rem at 78% -8%, rgba(120, 100, 190, 0.28), transparent 70%),
+    radial-gradient(50rem 36rem at 4% 38%, rgba(70, 120, 110, 0.18), transparent 70%),
+    radial-gradient(60rem 50rem at 90% 95%, rgba(139, 109, 109, 0.22), transparent 70%),
+    #08060d;
+  background-attachment: fixed;
+}
+
+:root[data-presentation="reading"] body.memoir { background: var(--background); }
+
+.memoir a { color: var(--memoir-accent); }
+
+.memoir-page {
+  display: grid;
+  grid-template-columns: minmax(8rem, 12rem) minmax(0, 68ch);
+  column-gap: var(--space-7);
+  justify-content: center;
+  padding-block: var(--section-gap);
+}
+
+.memoir-head { display: contents; }
+
+.memoir-meta {
+  grid-column: 1;
+  margin: 0 0 var(--space-2);
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: var(--size-small);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--memoir-text);
+}
+.memoir-meta:first-child { margin-bottom: var(--space-5); }
+.memoir-meta a { text-decoration: none; }
+.memoir-meta .status::before { color: var(--memoir-accent); }
+
+.memoir-head h1 {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  margin: 0 0 var(--space-5);
+  font-family: var(--font-pixel);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 7vw, 4.6rem);
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--memoir-text);
+  overflow-wrap: anywhere;
+}
+
+.memoir-kicker {
+  grid-column: 2;
+  margin: 0 0 var(--space-7);
+  font-family: var(--font-mono);
+  font-size: var(--size-small);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--memoir-dim);
+}
+
+.memoir-body {
+  grid-column: 2;
+  display: block;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--memoir-text);
+}
+.memoir-body p { margin: 0 0 1.5em; }
+.memoir-body p:first-child::first-line { letter-spacing: 0.04em; }
+.memoir-body h2 { color: var(--memoir-dim); }
+
+@media (max-width: 52rem) {
+  .memoir-page { display: block; }
+  .memoir-head { display: block; }
+  .memoir-meta { text-align: left; display: inline-block; margin-right: var(--space-4); }
+  .memoir-meta:first-child { display: block; }
+  .memoir-head h1 { margin-top: var(--space-5); }
+  .memoir-body { font-size: 0.9375rem; }
+}
